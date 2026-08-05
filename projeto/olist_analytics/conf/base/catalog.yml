@@ -1,0 +1,237 @@
+# Data Catalog — este é o arquivo que substitui os 8 `pd.read_csv` com
+# caminho hardcoded do script antes/analise_olist.py (a dor #1 do PLANO.md).
+#
+# Cada dataset declara `metadata.kedro-viz.layer`, o que colore o grafo em
+# `kedro viz run` por camada — raw, intermediate, primary, feature,
+# model_input, models, reporting. É essa cor que sustenta o argumento de
+# governança e arquitetura da imersão.
+#
+# Documentação: https://docs.kedro.org/en/stable/catalog-data/introduction/
+
+# =============================================================================
+# RAW — os 8 CSVs do Kaggle, sem alteração. Nomeados em português; o arquivo
+# físico mantém o nome original do Olist (rastreabilidade até a fonte).
+# =============================================================================
+
+olist_pedidos_raw:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/olist_orders_dataset.csv
+  metadata:
+    kedro-viz:
+      layer: raw
+
+olist_itens_raw:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/olist_order_items_dataset.csv
+  metadata:
+    kedro-viz:
+      layer: raw
+
+olist_pagamentos_raw:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/olist_order_payments_dataset.csv
+  metadata:
+    kedro-viz:
+      layer: raw
+
+olist_avaliacoes_raw:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/olist_order_reviews_dataset.csv
+  metadata:
+    kedro-viz:
+      layer: raw
+
+olist_clientes_raw:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/olist_customers_dataset.csv
+  metadata:
+    kedro-viz:
+      layer: raw
+
+olist_produtos_raw:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/olist_products_dataset.csv
+  metadata:
+    kedro-viz:
+      layer: raw
+
+olist_vendedores_raw:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/olist_sellers_dataset.csv
+  metadata:
+    kedro-viz:
+      layer: raw
+
+olist_traducao_categorias_raw:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/product_category_name_translation.csv
+  metadata:
+    kedro-viz:
+      layer: raw
+
+# =============================================================================
+# INTERMEDIATE — uma tabela limpa e tipada por tabela de origem, em Parquet
+# (formato colunar: mais rápido de ler e menor em disco que CSV — outro
+# argumento pequeno, mas real, pra trocar de formato só mudando esta linha).
+# =============================================================================
+
+pedidos_limpos:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/pedidos_limpos.parquet
+  metadata:
+    kedro-viz:
+      layer: intermediate
+
+pedidos_filtrados:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/pedidos_filtrados.parquet
+  metadata:
+    kedro-viz:
+      layer: intermediate
+
+itens_limpos:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/itens_limpos.parquet
+  metadata:
+    kedro-viz:
+      layer: intermediate
+
+pagamentos_agregados:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/pagamentos_agregados.parquet
+  metadata:
+    kedro-viz:
+      layer: intermediate
+
+avaliacoes_limpas:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/avaliacoes_limpas.parquet
+  metadata:
+    kedro-viz:
+      layer: intermediate
+
+clientes_limpos:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/clientes_limpos.parquet
+  metadata:
+    kedro-viz:
+      layer: intermediate
+
+produtos_traduzidos:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/produtos_traduzidos.parquet
+  metadata:
+    kedro-viz:
+      layer: intermediate
+
+vendedores_limpos:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/vendedores_limpos.parquet
+  metadata:
+    kedro-viz:
+      layer: intermediate
+
+# =============================================================================
+# PRIMARY — a tabela-verdade do negócio: um pedido por linha.
+# =============================================================================
+
+pedidos_enriquecidos:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/pedidos_enriquecidos.parquet
+  metadata:
+    kedro-viz:
+      layer: primary
+
+# =============================================================================
+# FEATURE — variáveis derivadas. Os passos intermediários (prazo, atraso,
+# frete) ficam em memória de propósito: só a tabela final é persistida.
+# =============================================================================
+
+tabela_analitica:
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/tabela_analitica.parquet
+  metadata:
+    kedro-viz:
+      layer: feature
+
+# =============================================================================
+# MODEL INPUT — conjuntos de treino e teste já separados.
+# =============================================================================
+
+dados_treino:
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/dados_treino.parquet
+  metadata:
+    kedro-viz:
+      layer: model_input
+
+dados_teste:
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/dados_teste.parquet
+  metadata:
+    kedro-viz:
+      layer: model_input
+
+# =============================================================================
+# MODELS — o modelo treinado, serializado.
+# =============================================================================
+
+modelo_review_ruim:
+  type: pickle.PickleDataset
+  filepath: data/06_models/modelo_review_ruim.pickle
+  metadata:
+    kedro-viz:
+      layer: models
+
+# =============================================================================
+# REPORTING — saídas para consumo humano. Formatos legíveis (CSV/JSON), para
+# abrir na tela durante a aula.
+#
+# `metricas_modelo` é o dataset versionado do projeto (versioned: true): cada
+# `kedro run` grava uma nova versão com timestamp, sem sobrescrever a
+# anterior — a demonstração de governança e comparação entre execuções.
+# =============================================================================
+
+receita_mensal:
+  type: pandas.CSVDataset
+  filepath: data/08_reporting/receita_mensal.csv
+  save_args:
+    index: false
+  metadata:
+    kedro-viz:
+      layer: reporting
+
+top_categorias:
+  type: pandas.CSVDataset
+  filepath: data/08_reporting/top_categorias.csv
+  save_args:
+    index: false
+  metadata:
+    kedro-viz:
+      layer: reporting
+
+review_por_estado:
+  type: pandas.CSVDataset
+  filepath: data/08_reporting/review_por_estado.csv
+  save_args:
+    index: false
+  metadata:
+    kedro-viz:
+      layer: reporting
+
+importancia_features:
+  type: pandas.CSVDataset
+  filepath: data/08_reporting/importancia_features.csv
+  save_args:
+    index: false
+  metadata:
+    kedro-viz:
+      layer: reporting
+
+metricas_modelo:
+  type: json.JSONDataset
+  filepath: data/08_reporting/metricas_modelo.json
+  versioned: true
+  metadata:
+    kedro-viz:
+      layer: reporting

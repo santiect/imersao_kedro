@@ -1,0 +1,66 @@
+# Publica o Kedro-Viz estático no GitHub Pages.
+#
+# NÃO habilitado por padrão: só roda quando disparado manualmente
+# (workflow_dispatch), porque depende de credenciais do Kaggle e reprocessa
+# o dataset completo. Ver README.md ("Publicar o Kedro-Viz") para o passo a
+# passo de ativação — inclui configurar os secrets abaixo e ligar o GitHub
+# Pages no repositório.
+#
+# Por que baixa o dataset em vez de usar dado do repositório: a política deste
+# projeto (PLANO.md secao 3.0) é nao versionar nenhum arquivo de dado, por
+# causa da licenca CC BY-NC-SA 4.0 do Olist. Este workflow busca o dataset
+# com as credenciais do PRÓPRIO instrutor (secrets do repositório, nunca
+# commitados) — o mesmo dado que ele já usa localmente, só que buscado de
+# novo no ambiente do GitHub Actions.
+#
+# Secrets necessários (Settings > Secrets and variables > Actions):
+#   KAGGLE_USERNAME  — usuário Kaggle do instrutor
+#   KAGGLE_KEY       — chave de API Kaggle (gerada em kaggle.com/settings)
+
+name: Publicar Kedro-Viz
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências do projeto
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r ambiente/requirements.txt
+
+      - name: Baixar o dataset do Kaggle
+        env:
+          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+        run: |
+          pip install kaggle
+          mkdir -p dados/raw
+          kaggle datasets download -d olistbr/brazilian-ecommerce -p dados/raw --unzip
+
+      - name: Gerar a amostra local (nunca commitada)
+        run: python dados/preparar_amostra.py
+
+      - name: Rodar o pipeline completo
+        working-directory: projeto/olist_analytics
+        run: kedro run
+
+      - name: Publicar o Kedro-Viz no GitHub Pages
+        uses: kedro-org/publish-kedro-viz@v3
+        with:
+          project_path: projeto/olist_analytics

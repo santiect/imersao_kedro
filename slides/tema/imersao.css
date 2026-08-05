@@ -1,0 +1,174 @@
+/* @theme imersao */
+
+/*
+Tema claro, alto contraste, fonte grande — o Google Meet comprime a imagem
+bastante, então prioriza legibilidade a 100% do zoom do participante.
+*/
+
+section {
+  background: #ffffff;
+  color: #1a1a2e;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 28px;
+  padding: 60px 70px;
+  line-height: 1.45;
+}
+
+h1 {
+  font-size: 44px;
+  color: #0f172a;
+  border-bottom: 6px solid #ff9f1c;
+  padding-bottom: 16px;
+  margin-bottom: 32px;
+}
+
+h2 {
+  font-size: 34px;
+  color: #0f172a;
+  margin-bottom: 24px;
+}
+
+h3 {
+  font-size: 28px;
+  color: #334155;
+}
+
+p, li {
+  font-size: 26px;
+}
+
+ul, ol {
+  padding-left: 40px;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+strong {
+  color: #b91c1c;
+}
+
+code {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 0.85em;
+}
+
+pre {
+  background: #0f172a;
+  border-radius: 8px;
+  padding: 20px 24px;
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+pre code {
+  background: transparent;
+  color: #e2e8f0;
+}
+
+blockquote {
+  border-left: 6px solid #ff9f1c;
+  padding-left: 24px;
+  color: #334155;
+  font-style: italic;
+}
+
+table {
+  font-size: 22px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid #cbd5e1;
+  padding: 8px 14px;
+  text-align: left;
+}
+
+th {
+  background: #f1f5f9;
+}
+
+/* Frase de impacto de negócio — usar como <p class="impacto"> no fim de slides conceituais */
+.impacto {
+  margin-top: 32px;
+  padding: 16px 24px;
+  background: #fff7ed;
+  border-left: 6px solid #ff9f1c;
+  font-weight: 600;
+  font-size: 26px;
+}
+
+/* Slide-marcador de DEMO — fundo contrastante para o instrutor identificar de longe */
+section.demo {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+section.demo h1, section.demo h2 {
+  color: #ff9f1c;
+  border-color: #ff9f1c;
+}
+
+section.demo .rotulo {
+  font-size: 22px;
+  letter-spacing: 4px;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+/* Slide de pausa */
+section.pausa {
+  background: #f1f5f9;
+  color: #0f172a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+section.pausa h1 {
+  border: none;
+  font-size: 56px;
+}
+
+/* Slide-âncora das 4 dores */
+section.ancora {
+  background: #fff7ed;
+}
+
+section.ancora .dor-resolvida {
+  text-decoration: line-through;
+  color: #94a3b8;
+}
+
+/* Capa */
+section.capa {
+  background: #0f172a;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+section.capa h1 {
+  color: #ffffff;
+  border-color: #ff9f1c;
+  font-size: 52px;
+}
+
+section.capa p {
+  color: #cbd5e1;
+  font-size: 28px;
+}
+
+footer {
+  font-size: 18px;
+  color: #94a3b8;
+}

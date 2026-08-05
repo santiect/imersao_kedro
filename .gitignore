@@ -1,0 +1,56 @@
+# ---------------------------------------------------------------------------
+# DADOS — nunca versionar. Ver PLANO.md secao 3.0 (licenca CC BY-NC-SA 4.0
+# do dataset Olist: usar em aula esta ok, redistribuir no repo nao).
+# Bloqueio duplo: por pasta e por extensao, de proposito.
+# ---------------------------------------------------------------------------
+dados/raw/
+projeto/olist_analytics/data/
+*.csv
+*.parquet
+*.xlsx
+
+# ---------------------------------------------------------------------------
+# Ambiente Python
+# ---------------------------------------------------------------------------
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+
+# ---------------------------------------------------------------------------
+# Kedro
+# ---------------------------------------------------------------------------
+.telemetry
+projeto/olist_analytics/logs/
+projeto/olist_analytics/info.log
+projeto/olist_analytics/*.log
+projeto/olist_analytics/.kedro.yml.local
+mlruns/
+
+# ---------------------------------------------------------------------------
+# Kedro-Viz
+# ---------------------------------------------------------------------------
+projeto/olist_analytics/build/
+projeto/olist_analytics/.viz/
+stats.json
+
+# ---------------------------------------------------------------------------
+# Testes / cobertura
+# ---------------------------------------------------------------------------
+.pytest_cache/
+.coverage
+
+# ---------------------------------------------------------------------------
+# Slides — artefatos exportados (fonte .md e tema ficam versionados)
+# ---------------------------------------------------------------------------
+slides/*.pdf
+slides/*.html
+
+# ---------------------------------------------------------------------------
+# SO / editor
+# ---------------------------------------------------------------------------
+.DS_Store
+.vscode/
+*.swp

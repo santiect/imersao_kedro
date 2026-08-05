@@ -1,0 +1,4 @@
+# As dependências deste projeto vivem em pyproject.toml.
+# Para instalar a partir da raiz do repositório, use ambiente/requirements.txt
+# (mesmas versões, fixadas) — ver ambiente/setup.md.
+-e .

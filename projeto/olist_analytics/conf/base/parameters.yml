@@ -1,0 +1,30 @@
+# Parâmetros do projeto — decisões de NEGÓCIO, não de engenharia.
+#
+# Esta é a demonstração central da dor #2 (PLANO.md secao 1.2): no script
+# "antes" (antes/analise_olist.py), estes mesmos números estão espalhados
+# pelo código, repetidos e sem um dono. Aqui, mudar "vamos olhar 2018
+# inteiro" ou "vamos considerar nota 3 como insatisfação" é editar UMA linha,
+# neste arquivo, sem tocar em nenhum node.
+#
+# Demo sugerida (Encontro 2): rodar `kedro run` duas vezes, mudando só
+# analise.nota_corte_review_ruim de 2 para 3, e comparar reporting/.
+
+periodo:
+  inicio: "2017-01-01"
+  fim: "2018-08-31"
+
+analise:
+  # nota (1 a 5) a partir da qual um pedido conta como "cliente insatisfeito"
+  nota_corte_review_ruim: 2
+  # frete acima disso, em % do valor dos itens, é tratado como outlier
+  frete_percentual_maximo: 0.5
+  # pedidos cancelados entram na análise?
+  incluir_pedidos_cancelados: false
+
+relatorio:
+  top_n_categorias: 10
+
+modelo:
+  proporcao_teste: 0.25
+  semente: 42
+  n_estimadores: 200

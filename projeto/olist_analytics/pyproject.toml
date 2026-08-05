@@ -1,0 +1,66 @@
+[build-system]
+requires = [
+    "setuptools",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+requires-python = ">=3.10"
+name = "olist_analytics"
+readme = "README.md"
+dynamic = [
+    "version",
+]
+dependencies = [
+    # ipython alimenta `kedro ipython` (REPL) — não jupyter, ver CLAUDE.md
+    "ipython>=8.10",
+    "kedro==1.5.0",
+    "kedro-datasets[pandas-csvdataset,pandas-parquetdataset,pandas-exceldataset]==9.5.0",
+    "kedro-viz==12.4.0",
+    "kedro-mlflow==2.0.3",
+    "pandas==2.2.3",
+    "pyarrow==17.0.0",
+    "scikit-learn==1.5.2",
+    "openpyxl==3.1.5",
+]
+
+[project.scripts]
+olist-analytics = "olist_analytics.__main__:main"
+
+[project.entry-points."kedro.hooks"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest-cov>=3,<7",
+    "pytest-mock>=1.7.1, <2.0",
+    "pytest~=7.2",
+    "ruff~=0.12.0",
+]
+
+[tool.setuptools.dynamic.version]
+attr = "olist_analytics.__version__"
+
+[tool.setuptools.packages.find]
+where = [
+    "src",
+]
+namespaces = false
+
+[tool.kedro]
+package_name = "olist_analytics"
+project_name = "olist_analytics"
+kedro_init_version = "1.5.0"
+tools = "['Testing', 'Custom Logging', 'Data Structure']"
+example_pipeline = "False"
+source_dir = "src"
+
+[tool.pytest.ini_options]
+addopts = "--cov-report term-missing --cov src/olist_analytics -ra"
+
+[tool.coverage.report]
+fail_under = 0
+show_missing = true
+exclude_lines = [
+    "pragma: no cover",
+    "raise NotImplementedError",
+]
