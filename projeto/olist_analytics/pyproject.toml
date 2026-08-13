@@ -12,7 +12,8 @@ dynamic = [
     "version",
 ]
 dependencies = [
-    # ipython alimenta `kedro ipython` (REPL) — não jupyter, ver CLAUDE.md
+    # ipython alimenta `kedro ipython` (REPL) — a ferramenta PRINCIPAL de
+    # exploração interativa deste projeto, ver CLAUDE.md
     "ipython>=8.10",
     "kedro==1.5.0",
     "kedro-datasets[pandas-csvdataset,pandas-parquetdataset,pandas-exceldataset]==9.5.0",
@@ -22,6 +23,12 @@ dependencies = [
     "pyarrow==17.0.0",
     "scikit-learn==1.5.2",
     "openpyxl==3.1.5",
+    "matplotlib==3.9.2",
+    # notebook: uso OPCIONAL e secundário, só para visualização (tabela
+    # formatada, gráfico inline) — ver notebooks/explorar_catalogo.ipynb e
+    # CLAUDE.md. Nunca commitar este notebook com output executado.
+    "notebook==7.6.2",
+    "ipykernel==7.3.0",
 ]
 
 [project.scripts]

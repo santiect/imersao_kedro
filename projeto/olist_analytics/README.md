@@ -53,7 +53,7 @@ kedro viz build              # gera site estático em build/
 
 ## Explorar interativamente
 
-Sem Jupyter — este projeto usa o REPL de terminal do Kedro:
+A ferramenta principal é o REPL de terminal do Kedro:
 
 ```bash
 kedro ipython
@@ -62,6 +62,23 @@ kedro ipython
 Carrega `catalog`, `context`, `session` e `pipelines` no escopo. Exemplo:
 ```python
 catalog.load("tabela_analitica").head()
+```
+
+### Notebook (opcional, só para visualização)
+
+Existe um único notebook, `notebooks/explorar_catalogo.ipynb`, para quando
+tabela formatada ou gráfico inline ajudam mais que o terminal — não guarda
+nenhuma lógica de pipeline, só lê o catálogo.
+
+```bash
+kedro jupyter notebook
+```
+
+⚠️ **Nunca commitar esse notebook com output executado** — a saída de
+`catalog.load()` é dado real do Olist (ver `PLANO.md` §3.0 sobre a licença).
+Antes de qualquer commit:
+```bash
+jupyter nbconvert --clear-output --inplace notebooks/explorar_catalogo.ipynb
 ```
 
 ## Testes
