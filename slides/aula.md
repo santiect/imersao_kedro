@@ -200,7 +200,27 @@ cd projeto/olist_analytics
 ls
 ```
 
-`conf/` · `src/olist_analytics/` · `data/`
+`conf/` · `src/olist_analytics/` · `data/` · `notebooks/`
+
+---
+
+# Lakehouse — de onde vem essa ideia
+
+- **Data Lake**: barato, flexível — mas sem controle vira "pântano de dados"
+- **Data Warehouse**: estruturado, confiável — mas caro e rígido
+- **Lakehouse**: mistura os dois — barato como Lake, confiável como Warehouse
+
+<p class="impacto">O padrão que empresas usam hoje pra guardar dado em escala.</p>
+
+---
+
+# Medallion — como o Lakehouse se organiza por dentro
+
+- **Bronze**: dado bruto, exatamente como chegou
+- **Silver**: limpo, validado, unificado entre fontes
+- **Gold**: agregado, pronto pro consumo — dashboard, modelo
+
+<p class="impacto">É a mesma lógica que o Kedro usa pra numerar suas pastas de dado.</p>
 
 ---
 
@@ -460,8 +480,8 @@ Dataset: *Brazilian E-Commerce Public Dataset by Olist (Kaggle),
 CC BY-NC-SA 4.0*
 
 - Documentação oficial: docs.kedro.org
-- Repositório desta imersão: (link no chat)
-- Kedro-Viz publicado: (link no chat)
+- Repositório desta imersão: github.com/santiect/imersao_kedro
+- Kedro-Viz publicado: santiect.github.io/imersao_kedro
 
 ---
 

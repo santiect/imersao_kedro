@@ -167,7 +167,7 @@ não batem. Se fizer esse extra, não gaste mais que 3 min nele.
 ## [0:50–1:15] Anatomia do projeto + Data Catalog (dor #1) · (25 min)
 
 **Objetivo:** mostrar a estrutura de um projeto real e resolver a dor #1 ao vivo.
-**Slides:** 18–22
+**Slides:** 18–24
 **Tela:** terminal/VS Code → slides
 
 ### Comandos
@@ -177,7 +177,8 @@ code .                      # se for usar VS Code
 ls
 ```
 Abrir e comentar rapidamente: `conf/`, `src/olist_analytics/`, `data/`
-(as 8 subpastas numeradas — 01_raw até 08_reporting).
+(as 8 subpastas numeradas — 01_raw até 08_reporting), `notebooks/` (citar de
+passagem — não é o fluxo recomendado, ver bloco do Data Catalog).
 
 ```bash
 # o catálogo — abrir conf/base/catalog.yml no editor, rolar devagar
@@ -249,12 +250,18 @@ com output no repositório.
   diferença é que aqui ele não guarda nenhuma lógica do projeto, só olha o
   que já existe. O risco que vimos no início da aula era usar notebook como
   o projeto inteiro, não usar notebook."
-- Slide 19 (camadas): "Essa numeração de pastas — 01 a 08 — é convenção do
-  Kedro. É o mesmo princípio do Medallion/Lakehouse que muita empresa já usa:
-  dado bruto nunca se mistura com dado tratado."
-- Slide 21 (antes/depois): comparar lado a lado o trecho do `analise_olist.py`
+- Slide 19 (Lakehouse): "Data Lake é barato e flexível mas vira bagunça sem
+  controle; Data Warehouse é confiável mas caro e rígido. Lakehouse é o meio
+  termo que virou padrão de mercado — barato como Lake, confiável como
+  Warehouse."
+- Slide 20 (Medallion): "e como o Lakehouse organiza o dado por dentro?
+  Bronze (bruto), Silver (limpo), Gold (pronto pro consumo). É exatamente
+  essa lógica que o Kedro usa pra numerar as pastas de dado."
+- Slide 21 (camadas): "Essa numeração de pastas — 01 a 08 — é a mesma lógica
+  que acabamos de ver: dado bruto nunca se mistura com dado tratado."
+- Slide 23 (antes/depois): comparar lado a lado o trecho do `analise_olist.py`
   com o `catalog.yml`.
-- Slide 22 (recap): voltar ao slide-âncora, riscar a dor #1.
+- Slide 24 (recap): voltar ao slide-âncora, riscar a dor #1.
 
 ### Perguntas prováveis
 - **"E se o dado tiver senha, tipo banco de dados?"** → Aponta pra
@@ -281,7 +288,7 @@ Meet permitir. Aproveitar para checar o chat.
 ## [1:25–1:55] Nodes/Pipelines (dor #3) + Parameters (dor #2) · (30 min)
 
 **Objetivo:** mostrar execução seletiva e configuração fora do código.
-**Slides:** 23–26
+**Slides:** 25–28
 **Tela:** VS Code → terminal → slides
 
 ### Comandos — Nodes e Pipelines
@@ -313,7 +320,7 @@ kedro run --to-nodes=limpar_pedidos
   Não recalculei nada anterior — o Kedro sabe que a tabela analítica já
   existe em disco e só roda o relatório. Lembra do bloco comentado no script
   antigo, `descomentar pra rodar o modelo`? Isso aqui resolve aquilo."
-- Slide 24 (recap): riscar dor #3.
+- Slide 26 (recap): riscar dor #3.
 
 ### Comandos — Parameters
 ```bash
@@ -342,7 +349,7 @@ git checkout -- conf/base/parameters.yml
 - "Mudei UMA linha — o que conta como 'cliente insatisfeito' — e o relatório
   inteiro recalculou com o novo critério. No script antigo isso era procurar
   o número em 4 lugares e torcer pra não esquecer nenhum."
-- Slide 26 (recap): riscar dor #2.
+- Slide 28 (recap): riscar dor #2.
 
 ### Perguntas prováveis
 - **"Isso equivale a um parâmetro de função?"** → Sim, mas centralizado — todo
@@ -361,7 +368,7 @@ só verbalmente.
 ## [1:55–2:25] Kedro-Viz (dor #4) — o clímax · (30 min)
 
 **Objetivo:** o momento de maior impacto visual da aula.
-**Slides:** 27–30
+**Slides:** 29–32
 **Tela:** terminal → navegador → slides
 
 ### Comandos
@@ -436,7 +443,7 @@ importante ter backup, porque é o clímax da aula.
 ## [2:35–2:50] Hooks · (15 min)
 
 **Objetivo:** mostrar governança automática — dado ruim não passa.
-**Slides:** 31
+**Slides:** 33
 **Tela:** terminal → VS Code → terminal
 
 ### O que falar (abertura, sem comando)
@@ -495,25 +502,25 @@ com a explicação verbal da tabela de tempo por node (que já apareceu em todo
 ## [2:50–3:00] Produção, valor e encerramento · (10 min)
 
 **Objetivo:** fechar com o argumento de negócio e entregar o material.
-**Slides:** 32–36
+**Slides:** 34–38
 **Tela:** slides
 
 ### O que falar
-- Slide 32 (panorama, rápido): "em produção, esse projeto roda dentro de um
+- Slide 34 (panorama, rápido): "em produção, esse projeto roda dentro de um
   container Docker, agendado por uma ferramenta como Airflow, e pode registrar
   experimentos com o MLflow. Não vou entrar em como configurar isso — só
   saibam que existe e que o Kedro se encaixa nesse ecossistema sem mudar a
   estrutura que vocês viram hoje."
-- Slide 33 (argumento econômico): "o ganho real não é técnico, é de time.
+- Slide 35 (argumento econômico): "o ganho real não é técnico, é de time.
   Uma pessoa nova entra no projeto e entende a estrutura em horas, não em
   dias lendo um script de 200 linhas. Se quem escreveu sai da empresa, o
   projeto continua legível."
-- Slide 34 (quando não vale a pena): projeto de exploração de 1 pessoa, muito
+- Slide 36 (quando não vale a pena): projeto de exploração de 1 pessoa, muito
   curto, não precisa dessa estrutura — o Kedro compensa quando o projeto vai
   durar e/ou ser compartilhado.
-- Slide 35: créditos do dataset (*"Brazilian E-Commerce Public Dataset by
+- Slide 37: créditos do dataset (*"Brazilian E-Commerce Public Dataset by
   Olist (Kaggle), CC BY-NC-SA 4.0"*) + recursos pra continuar.
-- Slide 36: agradecer, avisar que o link do repositório e do Kedro-Viz
+- Slide 38: agradecer, avisar que o link do repositório e do Kedro-Viz
   publicado vão para o chat, abrir pra últimas perguntas.
 
 ### Perguntas prováveis
