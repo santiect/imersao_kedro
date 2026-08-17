@@ -1,3 +1,4 @@
+
 """
 Analise de satisfacao dos clientes - Olist
 Pediu o Ricardo (diretoria) pra reuniao de terca
@@ -83,13 +84,13 @@ print(taxa_por_estado)
 # modelo preditivo - comecei mas não terminei, ver com o Bruno
 # descomentar pra rodar o modelo
 # ============================================================
-# df_modelo = df_final2.dropna(subset=["review_ruim", "prazo_entrega", "frete_pct"])
-# X = df_modelo[["prazo_entrega", "frete_pct", "atraso"]]
-# y = df_modelo["review_ruim"]
-# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
-# modelo = LogisticRegression()
-# modelo.fit(X_train, y_train)
-# print("Acurácia:", modelo.score(X_test, y_test))
+#df_modelo = df_final2.dropna(subset=["review_ruim", "prazo_entrega", "frete_pct"])
+#X = df_modelo[["prazo_entrega", "frete_pct", "atraso"]]
+#y = df_modelo["review_ruim"]
+#X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
+#modelo = LogisticRegression()
+#modelo.fit(X_train, y_train)
+#print("Acurácia:", modelo.score(X_test, y_test))
 
 # --- junta tudo pra mandar pro Ricardo ---
 # essa parte ficou grande, cuidado pra não rodar 2x sem reiniciar o kernel
@@ -120,3 +121,6 @@ print("\npronto, salvou resultado.xlsx na pasta")
 
 # nota pra próxima vez: separar isso em pedaços, tá difícil de mexer
 # ver se dá pra rodar só a parte do modelo sem rodar tudo de novo (demora)
+#
+# 
+# PASTA = "/home/everton.santi/imersao_kedro/dados/raw/"

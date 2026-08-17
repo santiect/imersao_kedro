@@ -1,0 +1,351 @@
+{
+  "nodes": [
+    {
+      "id": "f1f1425b",
+      "name": "parameters",
+      "tags": [],
+      "pipelines": [
+        "ingestao",
+        "__default__",
+        "features",
+        "relatorio",
+        "modelagem"
+      ],
+      "type": "parameters",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "layer": null,
+      "dataset_type": null
+    },
+    {
+      "id": "7375706e",
+      "name": "pedidos_enriquecidos",
+      "tags": [],
+      "pipelines": [
+        "features",
+        "__default__",
+        "integracao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 98353,
+          "columns": 22,
+          "file_size": 16685802
+        },
+        "styles": null
+      },
+      "layer": "primary",
+      "dataset_type": "pandas.parquet_dataset.ParquetDataset"
+    },
+    {
+      "id": "59520e6a",
+      "name": "calcular_prazo_entrega",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "features"
+      ],
+      "type": "task",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "parameters": {},
+      "full_name": "calcular_prazo_entrega"
+    },
+    {
+      "id": "c22b3b3e",
+      "name": "pedidos_com_prazo",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "features"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 98353,
+          "columns": 23
+        },
+        "styles": null
+      },
+      "layer": null,
+      "dataset_type": "io.memory_dataset.MemoryDataset"
+    },
+    {
+      "id": "b214658d",
+      "name": "calcular_atraso",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "features"
+      ],
+      "type": "task",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "parameters": {},
+      "full_name": "calcular_atraso"
+    },
+    {
+      "id": "6f4b3a97",
+      "name": "pedidos_com_atraso",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "features"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 98353,
+          "columns": 24
+        },
+        "styles": null
+      },
+      "layer": null,
+      "dataset_type": "io.memory_dataset.MemoryDataset"
+    },
+    {
+      "id": "00f121d1",
+      "name": "calcular_peso_frete",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "features"
+      ],
+      "type": "task",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "parameters": {
+        "periodo": {
+          "inicio": "2017-01-01",
+          "fim": "2018-08-31"
+        },
+        "analise": {
+          "nota_corte_review_ruim": 2,
+          "frete_percentual_maximo": 0.5,
+          "incluir_pedidos_cancelados": false
+        },
+        "relatorio": {
+          "top_n_categorias": 10
+        },
+        "modelo": {
+          "proporcao_teste": 0.25,
+          "semente": 42,
+          "n_estimadores": 200
+        }
+      },
+      "full_name": "calcular_peso_frete"
+    },
+    {
+      "id": "48cd1cb7",
+      "name": "pedidos_com_frete",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "features"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 82784,
+          "columns": 25
+        },
+        "styles": null
+      },
+      "layer": null,
+      "dataset_type": "io.memory_dataset.MemoryDataset"
+    },
+    {
+      "id": "1478144d",
+      "name": "montar_tabela_analitica",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "features"
+      ],
+      "type": "task",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "parameters": {
+        "periodo": {
+          "inicio": "2017-01-01",
+          "fim": "2018-08-31"
+        },
+        "analise": {
+          "nota_corte_review_ruim": 2,
+          "frete_percentual_maximo": 0.5,
+          "incluir_pedidos_cancelados": false
+        },
+        "relatorio": {
+          "top_n_categorias": 10
+        },
+        "modelo": {
+          "proporcao_teste": 0.25,
+          "semente": 42,
+          "n_estimadores": 200
+        }
+      },
+      "full_name": "montar_tabela_analitica"
+    },
+    {
+      "id": "44bf045b",
+      "name": "tabela_analitica",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "relatorio",
+        "modelagem",
+        "features"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 80423,
+          "columns": 12,
+          "file_size": 5227076
+        },
+        "styles": null
+      },
+      "layer": "feature",
+      "dataset_type": "pandas.parquet_dataset.ParquetDataset"
+    }
+  ],
+  "edges": [
+    {
+      "source": "59520e6a",
+      "target": "c22b3b3e"
+    },
+    {
+      "source": "48cd1cb7",
+      "target": "1478144d"
+    },
+    {
+      "source": "6f4b3a97",
+      "target": "00f121d1"
+    },
+    {
+      "source": "c22b3b3e",
+      "target": "b214658d"
+    },
+    {
+      "source": "7375706e",
+      "target": "59520e6a"
+    },
+    {
+      "source": "f1f1425b",
+      "target": "00f121d1"
+    },
+    {
+      "source": "f1f1425b",
+      "target": "1478144d"
+    },
+    {
+      "source": "b214658d",
+      "target": "6f4b3a97"
+    },
+    {
+      "source": "1478144d",
+      "target": "44bf045b"
+    },
+    {
+      "source": "00f121d1",
+      "target": "48cd1cb7"
+    }
+  ],
+  "layers": [
+    "primary",
+    "intermediate",
+    "model_input",
+    "models",
+    "raw",
+    "reporting",
+    "feature"
+  ],
+  "tags": [],
+  "pipelines": [
+    {
+      "id": "__default__",
+      "name": "__default__"
+    },
+    {
+      "id": "integracao",
+      "name": "integracao"
+    },
+    {
+      "id": "ingestao",
+      "name": "ingestao"
+    },
+    {
+      "id": "relatorio",
+      "name": "relatorio"
+    },
+    {
+      "id": "features",
+      "name": "features"
+    },
+    {
+      "id": "modelagem",
+      "name": "modelagem"
+    }
+  ],
+  "modular_pipelines": {
+    "__root__": {
+      "id": "__root__",
+      "name": "__root__",
+      "inputs": [],
+      "outputs": [],
+      "children": [
+        {
+          "id": "7375706e",
+          "type": "data"
+        },
+        {
+          "id": "f1f1425b",
+          "type": "parameters"
+        },
+        {
+          "id": "00f121d1",
+          "type": "task"
+        },
+        {
+          "id": "1478144d",
+          "type": "task"
+        },
+        {
+          "id": "48cd1cb7",
+          "type": "data"
+        },
+        {
+          "id": "b214658d",
+          "type": "task"
+        },
+        {
+          "id": "44bf045b",
+          "type": "data"
+        },
+        {
+          "id": "c22b3b3e",
+          "type": "data"
+        },
+        {
+          "id": "6f4b3a97",
+          "type": "data"
+        },
+        {
+          "id": "59520e6a",
+          "type": "task"
+        },
+        {
+          "id": "f1f1425b",
+          "type": "data"
+        }
+      ]
+    }
+  },
+  "selected_pipeline": "features"
+}

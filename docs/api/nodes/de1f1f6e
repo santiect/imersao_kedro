@@ -1,0 +1,13 @@
+{
+  "code": "def calcular_receita_mensal(tabela_analitica: pd.DataFrame) -> pd.DataFrame:\n    \"\"\"Receita paga, somada por mês de compra.\"\"\"\n    df = tabela_analitica.copy()\n    df[\"mes\"] = df[\"order_purchase_timestamp\"].dt.to_period(\"M\").astype(str)\n    return (\n        df.groupby(\"mes\")[\"valor_pago\"]\n        .sum()\n        .round(2)\n        .reset_index()\n        .rename(columns={\"valor_pago\": \"receita_total\"})\n        .sort_values(\"mes\")\n    )\n",
+  "filepath": "olist_analytics/src/olist_analytics/pipelines/relatorio/nodes.py",
+  "parameters": {},
+  "run_command": "kedro run --to-nodes='calcular_receita_mensal'",
+  "inputs": [
+    "tabela_analitica"
+  ],
+  "outputs": [
+    "receita_mensal"
+  ],
+  "preview": null
+}

@@ -24,9 +24,24 @@ Dois documentos governam o trabalho:
 1. **Os alunos não codificam.** Tudo é demonstração. Não crie exercícios,
    TODOs para o aluno preencher, ou material que pressuponha ambiente instalado
    na máquina deles.
-2. **Zero Jupyter Notebook.** Nenhum `.ipynb` no repo, nenhuma recomendação de
-   uso. Exploração interativa se faz com `kedro ipython` (REPL de terminal). A
-   pasta `notebooks/` gerada pelo `kedro new` deve ser removida.
+2. **`kedro ipython` é a ferramenta principal de exploração interativa —
+   notebook é secundário e opcional.** A crítica ao notebook nesta aula nunca
+   foi "notebook é proibido"; é "não construa o projeto inteiro dentro de um
+   notebook" (é exatamente o defeito do script em `antes/`, só que em células).
+   Uma vez que catálogo, nós, pipelines e parâmetros já existem, um notebook
+   que só *lê* o catálogo para visualizar (tabela formatada, gráfico) não tem
+   esse problema — não guarda lógica, não precisa ser reproduzido.
+   Consequência prática: existe **um único notebook**,
+   `projeto/olist_analytics/notebooks/explorar_catalogo.ipynb`, e ele:
+   - nunca é commitado com output executado (a saída de `catalog.load()` é
+     dado real do Olist — ver regra de licença abaixo). Antes de qualquer
+     commit: `jupyter nbconvert --clear-output --inplace
+     notebooks/explorar_catalogo.ipynb`.
+   - nunca duplica lógica de node — só chama `%load_ext kedro.ipython` e lê
+     datasets já prontos.
+   - não é mencionado aos alunos como recomendação de fluxo de trabalho — é
+     uma curiosidade opcional dentro do bloco do Data Catalog, citada só se
+     sobrar tempo.
 3. **Português do Brasil em tudo** — texto, comentários, nomes de funções, nós,
    datasets e parâmetros.
 4. **Público de negócio, não de engenharia.** Todo conceito técnico fecha com
@@ -106,6 +121,8 @@ kedro viz run
 kedro viz run --autoreload
 kedro catalog describe-datasets   # "kedro catalog list" não existe mais no 1.x
 kedro ipython
+kedro jupyter notebook   # opcional/secundário — abre notebooks/explorar_catalogo.ipynb
+jupyter nbconvert --clear-output --inplace notebooks/explorar_catalogo.ipynb   # rodar SEMPRE antes de commitar
 
 # slides
 npx @marp-team/marp-cli slides/aula.md --pdf --allow-local-files --theme-set slides/tema/imersao.css

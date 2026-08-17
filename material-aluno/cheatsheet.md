@@ -1,5 +1,4 @@
 ---
-marp: false
 title: Kedro — Cheatsheet
 ---
 
@@ -50,7 +49,8 @@ src/<pacote>/pipelines/     # um subpasta por pipeline nomeado
 | `kedro viz run --autoreload` | grafo se atualiza ao salvar o código |
 | `kedro viz build` | gera site estático do grafo |
 | `kedro catalog describe-datasets` | lista os datasets do catálogo |
-| `kedro ipython` | REPL de terminal com `catalog`, `context`, `session` carregados — **não é Jupyter** |
+| `kedro ipython` | REPL de terminal com `catalog`, `context`, `session` carregados — a ferramenta **principal** de exploração |
+| `kedro jupyter notebook` | abre notebook com o mesmo `catalog` carregado — uso **opcional**, só para tabela formatada/gráfico |
 
 ## Vocabulário mínimo
 

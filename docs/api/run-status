@@ -1,0 +1,294 @@
+{
+  "nodes": {
+    "f449fd66": {
+      "duration": 0.06176827702438459,
+      "status": "success",
+      "error": null
+    },
+    "4d3c3803": {
+      "duration": 0.04541342396987602,
+      "status": "success",
+      "error": null
+    },
+    "bdf77428": {
+      "duration": 0.00542072398820892,
+      "status": "success",
+      "error": null
+    },
+    "2a3dcca8": {
+      "duration": 0.01583768002456054,
+      "status": "success",
+      "error": null
+    },
+    "522dc2be": {
+      "duration": 0.05746512702899054,
+      "status": "success",
+      "error": null
+    },
+    "f98e0479": {
+      "duration": 0.0010691880015656352,
+      "status": "success",
+      "error": null
+    },
+    "6fc55b00": {
+      "duration": 0.007512037002015859,
+      "status": "success",
+      "error": null
+    },
+    "b436cb87": {
+      "duration": 0.01087151700630784,
+      "status": "success",
+      "error": null
+    },
+    "b148bd6d": {
+      "duration": 0.30683092499384657,
+      "status": "success",
+      "error": null
+    },
+    "59520e6a": {
+      "duration": 0.014235930982977152,
+      "status": "success",
+      "error": null
+    },
+    "b214658d": {
+      "duration": 0.012296509987208992,
+      "status": "success",
+      "error": null
+    },
+    "00f121d1": {
+      "duration": 0.031194977986160666,
+      "status": "success",
+      "error": null
+    },
+    "1478144d": {
+      "duration": 0.047406771045643836,
+      "status": "success",
+      "error": null
+    },
+    "de1f1f6e": {
+      "duration": 0.02784487698227167,
+      "status": "success",
+      "error": null
+    },
+    "b4ea2783": {
+      "duration": 0.007303519989363849,
+      "status": "success",
+      "error": null
+    },
+    "f37cba99": {
+      "duration": 0.004289045988116413,
+      "status": "success",
+      "error": null
+    },
+    "04806414": {
+      "duration": 0.0202108719968237,
+      "status": "success",
+      "error": null
+    },
+    "516e9ba5": {
+      "duration": 12.590514001029078,
+      "status": "success",
+      "error": null
+    },
+    "9013969d": {
+      "duration": 0.5451688710018061,
+      "status": "success",
+      "error": null
+    },
+    "abba6963": {
+      "duration": 0.022966953983996063,
+      "status": "success",
+      "error": null
+    }
+  },
+  "datasets": {
+    "27feeec2": {
+      "name": "olist_pagamentos_raw",
+      "size": 5613475,
+      "status": "success",
+      "error": null
+    },
+    "f3474cff": {
+      "name": "pagamentos_agregados",
+      "size": 3435988,
+      "status": "success",
+      "error": null
+    },
+    "ae0d6d32": {
+      "name": "olist_avaliacoes_raw",
+      "size": 13894169,
+      "status": "success",
+      "error": null
+    },
+    "cc5bc58b": {
+      "name": "avaliacoes_limpas",
+      "size": 3963220,
+      "status": "success",
+      "error": null
+    },
+    "dc2fa4b9": {
+      "name": "olist_clientes_raw",
+      "size": 8531973,
+      "status": "success",
+      "error": null
+    },
+    "5635a0e1": {
+      "name": "clientes_limpos",
+      "size": 6826962,
+      "status": "success",
+      "error": null
+    },
+    "6d15a5ee": {
+      "name": "olist_itens_raw",
+      "size": 14862438,
+      "status": "success",
+      "error": null
+    },
+    "afcf9a68": {
+      "name": "itens_limpos",
+      "size": 6463185,
+      "status": "success",
+      "error": null
+    },
+    "961bae90": {
+      "name": "olist_pedidos_raw",
+      "size": 17348620,
+      "status": "success",
+      "error": null
+    },
+    "2e2a5b1e": {
+      "name": "pedidos_limpos",
+      "size": 10467603,
+      "status": "success",
+      "error": null
+    },
+    "17de887d": {
+      "name": "olist_vendedores_raw",
+      "size": 162180,
+      "status": "success",
+      "error": null
+    },
+    "07adaebf": {
+      "name": "vendedores_limpos",
+      "size": 119606,
+      "status": "success",
+      "error": null
+    },
+    "d8d90712": {
+      "name": "olist_produtos_raw",
+      "size": 2782205,
+      "status": "success",
+      "error": null
+    },
+    "b9c4c4c2": {
+      "name": "olist_traducao_categorias_raw",
+      "size": 2540,
+      "status": "success",
+      "error": null
+    },
+    "ac9feccd": {
+      "name": "produtos_traduzidos",
+      "size": 1158663,
+      "status": "success",
+      "error": null
+    },
+    "f1f1425b": {
+      "name": "parameters",
+      "size": 0,
+      "status": "success",
+      "error": null
+    },
+    "3ef378fe": {
+      "name": "pedidos_filtrados",
+      "size": 10467603,
+      "status": "success",
+      "error": null
+    },
+    "7375706e": {
+      "name": "pedidos_enriquecidos",
+      "size": 16685802,
+      "status": "success",
+      "error": null
+    },
+    "c22b3b3e": {
+      "name": "pedidos_com_prazo",
+      "size": 0,
+      "status": "success",
+      "error": null
+    },
+    "6f4b3a97": {
+      "name": "pedidos_com_atraso",
+      "size": 0,
+      "status": "success",
+      "error": null
+    },
+    "48cd1cb7": {
+      "name": "pedidos_com_frete",
+      "size": 0,
+      "status": "success",
+      "error": null
+    },
+    "44bf045b": {
+      "name": "tabela_analitica",
+      "size": 5227076,
+      "status": "success",
+      "error": null
+    },
+    "34d489b2": {
+      "name": "receita_mensal",
+      "size": 381,
+      "status": "success",
+      "error": null
+    },
+    "e6d7984d": {
+      "name": "review_por_estado",
+      "size": 374,
+      "status": "success",
+      "error": null
+    },
+    "0756b0c6": {
+      "name": "top_categorias",
+      "size": 252,
+      "status": "success",
+      "error": null
+    },
+    "44f91f3b": {
+      "name": "dados_treino",
+      "size": 1014261,
+      "status": "success",
+      "error": null
+    },
+    "305d9307": {
+      "name": "dados_teste",
+      "size": 366503,
+      "status": "success",
+      "error": null
+    },
+    "52eabac6": {
+      "name": "modelo_review_ruim",
+      "size": 241038189,
+      "status": "success",
+      "error": null
+    },
+    "06154291": {
+      "name": "metricas_modelo",
+      "size": 4096,
+      "status": "success",
+      "error": null
+    },
+    "1a338160": {
+      "name": "importancia_features",
+      "size": 124,
+      "status": "success",
+      "error": null
+    }
+  },
+  "pipeline": {
+    "run_id": "fd392349-3b48-4ac9-b4cb-5a36d2ee30e9",
+    "start_time": "2026-08-13T18:12:16.550328+00:00",
+    "end_time": "2026-08-13T18:12:32.815301+00:00",
+    "duration": 16.264973,
+    "status": "success",
+    "error": null
+  }
+}

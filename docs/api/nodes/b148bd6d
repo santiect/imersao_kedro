@@ -1,0 +1,19 @@
+{
+  "code": "def montar_pedidos_enriquecidos(\n    pedidos_filtrados: pd.DataFrame,\n    itens_limpos: pd.DataFrame,\n    pagamentos_agregados: pd.DataFrame,\n    avaliacoes_limpas: pd.DataFrame,\n    clientes_limpos: pd.DataFrame,\n    produtos_traduzidos: pd.DataFrame,\n    vendedores_limpos: pd.DataFrame,\n) -> pd.DataFrame:\n    \"\"\"Consolida um pedido por linha, juntando as 7 tabelas de entrada.\n\n    Simplificação assumida: quando um pedido tem mais de um item, produto e\n    vendedor vêm do primeiro item — o pedido em si permanece no grão de\n    negócio (1 linha = 1 pedido), que é o que o caso de uso precisa.\n    \"\"\"\n    itens_por_pedido = (\n        itens_limpos.sort_values(\"order_item_id\")\n        .groupby(\"order_id\")\n        .agg(\n            valor_itens=(\"price\", \"sum\"),\n            frete_total=(\"freight_value\", \"sum\"),\n            n_itens=(\"order_item_id\", \"count\"),\n            product_id=(\"product_id\", \"first\"),\n            seller_id=(\"seller_id\", \"first\"),\n        )\n        .reset_index()\n    )\n\n    base = pedidos_filtrados.merge(itens_por_pedido, on=\"order_id\", how=\"inner\")\n    base = base.merge(produtos_traduzidos, on=\"product_id\", how=\"left\")\n    base = base.merge(vendedores_limpos, on=\"seller_id\", how=\"left\")\n    base = base.merge(clientes_limpos, on=\"customer_id\", how=\"left\")\n    base = base.merge(pagamentos_agregados, on=\"order_id\", how=\"left\")\n    base = base.merge(\n        avaliacoes_limpas[[\"order_id\", \"review_score\"]], on=\"order_id\", how=\"left\"\n    )\n\n    logger.info(\n        \"pedidos_enriquecidos: %d pedidos, %d colunas\", len(base), base.shape[1]\n    )\n    return base\n",
+  "filepath": "olist_analytics/src/olist_analytics/pipelines/integracao/nodes.py",
+  "parameters": {},
+  "run_command": "kedro run --to-nodes='montar_pedidos_enriquecidos'",
+  "inputs": [
+    "pedidos_filtrados",
+    "itens_limpos",
+    "pagamentos_agregados",
+    "avaliacoes_limpas",
+    "clientes_limpos",
+    "produtos_traduzidos",
+    "vendedores_limpos"
+  ],
+  "outputs": [
+    "pedidos_enriquecidos"
+  ],
+  "preview": null
+}

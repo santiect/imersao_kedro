@@ -1,0 +1,13 @@
+{
+  "code": "def calcular_prazo_entrega(pedidos_enriquecidos: pd.DataFrame) -> pd.DataFrame:\n    \"\"\"Dias entre a compra e a entrega ao cliente.\"\"\"\n    df = pedidos_enriquecidos.copy()\n    df[\"prazo_entrega_dias\"] = (\n        df[\"order_delivered_customer_date\"] - df[\"order_purchase_timestamp\"]\n    ).dt.days\n    return df\n",
+  "filepath": "olist_analytics/src/olist_analytics/pipelines/features/nodes.py",
+  "parameters": {},
+  "run_command": "kedro run --to-nodes='calcular_prazo_entrega'",
+  "inputs": [
+    "pedidos_enriquecidos"
+  ],
+  "outputs": [
+    "pedidos_com_prazo"
+  ],
+  "preview": null
+}

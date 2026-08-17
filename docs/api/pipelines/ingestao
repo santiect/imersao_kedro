@@ -1,0 +1,719 @@
+{
+  "nodes": [
+    {
+      "id": "f449fd66",
+      "name": "agregar_pagamentos",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao"
+      ],
+      "type": "task",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "parameters": {},
+      "full_name": "agregar_pagamentos"
+    },
+    {
+      "id": "27feeec2",
+      "name": "olist_pagamentos_raw",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 103519,
+          "columns": 5,
+          "file_size": 5613475
+        },
+        "styles": null
+      },
+      "layer": "raw",
+      "dataset_type": "pandas.csv_dataset.CSVDataset"
+    },
+    {
+      "id": "f3474cff",
+      "name": "pagamentos_agregados",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao",
+        "integracao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 99091,
+          "columns": 3,
+          "file_size": 3435988
+        },
+        "styles": null
+      },
+      "layer": "intermediate",
+      "dataset_type": "pandas.parquet_dataset.ParquetDataset"
+    },
+    {
+      "id": "4d3c3803",
+      "name": "limpar_avaliacoes",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao"
+      ],
+      "type": "task",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "parameters": {},
+      "full_name": "limpar_avaliacoes"
+    },
+    {
+      "id": "ae0d6d32",
+      "name": "olist_avaliacoes_raw",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 98878,
+          "columns": 7,
+          "file_size": 13894169
+        },
+        "styles": null
+      },
+      "layer": "raw",
+      "dataset_type": "pandas.csv_dataset.CSVDataset"
+    },
+    {
+      "id": "cc5bc58b",
+      "name": "avaliacoes_limpas",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao",
+        "integracao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 98329,
+          "columns": 3,
+          "file_size": 3963220
+        },
+        "styles": null
+      },
+      "layer": "intermediate",
+      "dataset_type": "pandas.parquet_dataset.ParquetDataset"
+    },
+    {
+      "id": "bdf77428",
+      "name": "limpar_clientes",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao"
+      ],
+      "type": "task",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "parameters": {},
+      "full_name": "limpar_clientes"
+    },
+    {
+      "id": "dc2fa4b9",
+      "name": "olist_clientes_raw",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 99091,
+          "columns": 5,
+          "file_size": 8531973
+        },
+        "styles": null
+      },
+      "layer": "raw",
+      "dataset_type": "pandas.csv_dataset.CSVDataset"
+    },
+    {
+      "id": "5635a0e1",
+      "name": "clientes_limpos",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao",
+        "integracao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 99091,
+          "columns": 4,
+          "file_size": 6826962
+        },
+        "styles": null
+      },
+      "layer": "intermediate",
+      "dataset_type": "pandas.parquet_dataset.ParquetDataset"
+    },
+    {
+      "id": "2a3dcca8",
+      "name": "limpar_itens",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao"
+      ],
+      "type": "task",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "parameters": {},
+      "full_name": "limpar_itens"
+    },
+    {
+      "id": "6d15a5ee",
+      "name": "olist_itens_raw",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 112279,
+          "columns": 7,
+          "file_size": 14862438
+        },
+        "styles": null
+      },
+      "layer": "raw",
+      "dataset_type": "pandas.csv_dataset.CSVDataset"
+    },
+    {
+      "id": "afcf9a68",
+      "name": "itens_limpos",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao",
+        "integracao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 112279,
+          "columns": 7,
+          "file_size": 6463185
+        },
+        "styles": null
+      },
+      "layer": "intermediate",
+      "dataset_type": "pandas.parquet_dataset.ParquetDataset"
+    },
+    {
+      "id": "522dc2be",
+      "name": "limpar_pedidos",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao"
+      ],
+      "type": "task",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "parameters": {},
+      "full_name": "limpar_pedidos"
+    },
+    {
+      "id": "961bae90",
+      "name": "olist_pedidos_raw",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 99091,
+          "columns": 8,
+          "file_size": 17348620
+        },
+        "styles": null
+      },
+      "layer": "raw",
+      "dataset_type": "pandas.csv_dataset.CSVDataset"
+    },
+    {
+      "id": "2e2a5b1e",
+      "name": "pedidos_limpos",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 99091,
+          "columns": 8,
+          "file_size": 10467603
+        },
+        "styles": null
+      },
+      "layer": "intermediate",
+      "dataset_type": "pandas.parquet_dataset.ParquetDataset"
+    },
+    {
+      "id": "f98e0479",
+      "name": "limpar_vendedores",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao"
+      ],
+      "type": "task",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "parameters": {},
+      "full_name": "limpar_vendedores"
+    },
+    {
+      "id": "17de887d",
+      "name": "olist_vendedores_raw",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 3068,
+          "columns": 4,
+          "file_size": 162180
+        },
+        "styles": null
+      },
+      "layer": "raw",
+      "dataset_type": "pandas.csv_dataset.CSVDataset"
+    },
+    {
+      "id": "07adaebf",
+      "name": "vendedores_limpos",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao",
+        "integracao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 3068,
+          "columns": 3,
+          "file_size": 119606
+        },
+        "styles": null
+      },
+      "layer": "intermediate",
+      "dataset_type": "pandas.parquet_dataset.ParquetDataset"
+    },
+    {
+      "id": "6fc55b00",
+      "name": "traduzir_categorias",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao"
+      ],
+      "type": "task",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "parameters": {},
+      "full_name": "traduzir_categorias"
+    },
+    {
+      "id": "d8d90712",
+      "name": "olist_produtos_raw",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 32787,
+          "columns": 9,
+          "file_size": 2782205
+        },
+        "styles": null
+      },
+      "layer": "raw",
+      "dataset_type": "pandas.csv_dataset.CSVDataset"
+    },
+    {
+      "id": "b9c4c4c2",
+      "name": "olist_traducao_categorias_raw",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 71,
+          "columns": 2,
+          "file_size": 2540
+        },
+        "styles": null
+      },
+      "layer": "raw",
+      "dataset_type": "pandas.csv_dataset.CSVDataset"
+    },
+    {
+      "id": "ac9feccd",
+      "name": "produtos_traduzidos",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao",
+        "integracao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 32787,
+          "columns": 2,
+          "file_size": 1158663
+        },
+        "styles": null
+      },
+      "layer": "intermediate",
+      "dataset_type": "pandas.parquet_dataset.ParquetDataset"
+    },
+    {
+      "id": "b436cb87",
+      "name": "filtrar_pedidos_por_periodo",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao"
+      ],
+      "type": "task",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "parameters": {
+        "periodo": {
+          "inicio": "2017-01-01",
+          "fim": "2018-08-31"
+        },
+        "analise": {
+          "nota_corte_review_ruim": 2,
+          "frete_percentual_maximo": 0.5,
+          "incluir_pedidos_cancelados": false
+        },
+        "relatorio": {
+          "top_n_categorias": 10
+        },
+        "modelo": {
+          "proporcao_teste": 0.25,
+          "semente": 42,
+          "n_estimadores": 200
+        }
+      },
+      "full_name": "filtrar_pedidos_por_periodo"
+    },
+    {
+      "id": "f1f1425b",
+      "name": "parameters",
+      "tags": [],
+      "pipelines": [
+        "ingestao",
+        "__default__",
+        "features",
+        "relatorio",
+        "modelagem"
+      ],
+      "type": "parameters",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "layer": null,
+      "dataset_type": null
+    },
+    {
+      "id": "3ef378fe",
+      "name": "pedidos_filtrados",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao",
+        "integracao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 99091,
+          "columns": 8,
+          "file_size": 10467603
+        },
+        "styles": null
+      },
+      "layer": "intermediate",
+      "dataset_type": "pandas.parquet_dataset.ParquetDataset"
+    }
+  ],
+  "edges": [
+    {
+      "source": "6d15a5ee",
+      "target": "2a3dcca8"
+    },
+    {
+      "source": "2a3dcca8",
+      "target": "afcf9a68"
+    },
+    {
+      "source": "ae0d6d32",
+      "target": "4d3c3803"
+    },
+    {
+      "source": "bdf77428",
+      "target": "5635a0e1"
+    },
+    {
+      "source": "dc2fa4b9",
+      "target": "bdf77428"
+    },
+    {
+      "source": "2e2a5b1e",
+      "target": "b436cb87"
+    },
+    {
+      "source": "f1f1425b",
+      "target": "b436cb87"
+    },
+    {
+      "source": "27feeec2",
+      "target": "f449fd66"
+    },
+    {
+      "source": "b436cb87",
+      "target": "3ef378fe"
+    },
+    {
+      "source": "4d3c3803",
+      "target": "cc5bc58b"
+    },
+    {
+      "source": "d8d90712",
+      "target": "6fc55b00"
+    },
+    {
+      "source": "961bae90",
+      "target": "522dc2be"
+    },
+    {
+      "source": "522dc2be",
+      "target": "2e2a5b1e"
+    },
+    {
+      "source": "f449fd66",
+      "target": "f3474cff"
+    },
+    {
+      "source": "17de887d",
+      "target": "f98e0479"
+    },
+    {
+      "source": "6fc55b00",
+      "target": "ac9feccd"
+    },
+    {
+      "source": "f98e0479",
+      "target": "07adaebf"
+    },
+    {
+      "source": "b9c4c4c2",
+      "target": "6fc55b00"
+    }
+  ],
+  "layers": [
+    "feature",
+    "raw",
+    "model_input",
+    "models",
+    "primary",
+    "reporting",
+    "intermediate"
+  ],
+  "tags": [],
+  "pipelines": [
+    {
+      "id": "__default__",
+      "name": "__default__"
+    },
+    {
+      "id": "integracao",
+      "name": "integracao"
+    },
+    {
+      "id": "ingestao",
+      "name": "ingestao"
+    },
+    {
+      "id": "relatorio",
+      "name": "relatorio"
+    },
+    {
+      "id": "features",
+      "name": "features"
+    },
+    {
+      "id": "modelagem",
+      "name": "modelagem"
+    }
+  ],
+  "modular_pipelines": {
+    "__root__": {
+      "id": "__root__",
+      "name": "__root__",
+      "inputs": [],
+      "outputs": [],
+      "children": [
+        {
+          "id": "5635a0e1",
+          "type": "data"
+        },
+        {
+          "id": "6fc55b00",
+          "type": "task"
+        },
+        {
+          "id": "b436cb87",
+          "type": "task"
+        },
+        {
+          "id": "ac9feccd",
+          "type": "data"
+        },
+        {
+          "id": "afcf9a68",
+          "type": "data"
+        },
+        {
+          "id": "961bae90",
+          "type": "data"
+        },
+        {
+          "id": "2e2a5b1e",
+          "type": "data"
+        },
+        {
+          "id": "6d15a5ee",
+          "type": "data"
+        },
+        {
+          "id": "522dc2be",
+          "type": "task"
+        },
+        {
+          "id": "17de887d",
+          "type": "data"
+        },
+        {
+          "id": "b9c4c4c2",
+          "type": "data"
+        },
+        {
+          "id": "4d3c3803",
+          "type": "task"
+        },
+        {
+          "id": "f1f1425b",
+          "type": "parameters"
+        },
+        {
+          "id": "ae0d6d32",
+          "type": "data"
+        },
+        {
+          "id": "2a3dcca8",
+          "type": "task"
+        },
+        {
+          "id": "3ef378fe",
+          "type": "data"
+        },
+        {
+          "id": "cc5bc58b",
+          "type": "data"
+        },
+        {
+          "id": "d8d90712",
+          "type": "data"
+        },
+        {
+          "id": "f449fd66",
+          "type": "task"
+        },
+        {
+          "id": "27feeec2",
+          "type": "data"
+        },
+        {
+          "id": "bdf77428",
+          "type": "task"
+        },
+        {
+          "id": "f1f1425b",
+          "type": "data"
+        },
+        {
+          "id": "f3474cff",
+          "type": "data"
+        },
+        {
+          "id": "f98e0479",
+          "type": "task"
+        },
+        {
+          "id": "dc2fa4b9",
+          "type": "data"
+        },
+        {
+          "id": "07adaebf",
+          "type": "data"
+        }
+      ]
+    }
+  },
+  "selected_pipeline": "ingestao"
+}

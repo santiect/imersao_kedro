@@ -43,10 +43,19 @@ stats.json
 .coverage
 
 # ---------------------------------------------------------------------------
-# Slides — artefatos exportados (fonte .md e tema ficam versionados)
+# Jupyter — o único notebook do projeto (notebooks/explorar_catalogo.ipynb)
+# é versionado, mas SEMPRE sem output executado (ver PLANO.md secao 3.0: a
+# saida de catalog.load() e dado real do Olist). Checkpoints nunca entram.
+# ---------------------------------------------------------------------------
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+
+# ---------------------------------------------------------------------------
+# Slides e material do aluno — artefatos exportados (fonte .md fica versionada)
 # ---------------------------------------------------------------------------
 slides/*.pdf
 slides/*.html
+material-aluno/*.pdf
 
 # ---------------------------------------------------------------------------
 # SO / editor

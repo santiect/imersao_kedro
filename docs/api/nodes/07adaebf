@@ -1,0 +1,12 @@
+{
+  "type": "pandas.parquet_dataset.ParquetDataset",
+  "filepath": "/home/everton.santi/imersao_kedro/projeto/olist_analytics/data/02_intermediate/vendedores_limpos.parquet",
+  "run_command": "kedro run --to-outputs=vendedores_limpos",
+  "preview": null,
+  "preview_type": null,
+  "stats": {
+    "rows": 3068,
+    "columns": 3,
+    "file_size": 119606
+  }
+}

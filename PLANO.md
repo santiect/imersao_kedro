@@ -20,7 +20,7 @@
 | Formato | Aula remota via Google Meet, **100% demonstração** — alunos apenas assistem |
 | Carga | **1 encontro, 3h no máximo** |
 | Idioma | Português do Brasil (material e código) |
-| Proibido | Jupyter Notebook em qualquer momento. Exploração interativa, quando necessária, usa `kedro ipython` (REPL de terminal) |
+| Ferramenta de exploração | `kedro ipython` (REPL de terminal) é a principal. Um único notebook opcional existe só para visualização — ver §1.4 |
 | Objetivo pedagógico | Que o aluno saia sabendo **o que é**, **para que serve**, **quando vale a pena** e **como é o dia a dia** de um projeto Kedro — não que saiba escrever um |
 
 ### 1.1 Princípio de design da imersão
@@ -73,6 +73,35 @@ O projeto Kedro (`projeto/olist_analytics/`) **mantém os 5 pipelines**
 (`ingestao`, `integracao`, `features`, `relatorio`, `modelagem`) e os 2 hooks
 já implementados — nada no código precisa mudar. O corte é só de **tempo de
 demonstração e de slide**, não de escopo técnico do projeto.
+
+### 1.4 Notebook: opcional, não a ferramenta principal
+
+A crítica desta imersão nunca foi "notebook é proibido" — é "não construa o
+**projeto inteiro** dentro de um notebook". É exatamente o defeito de
+`antes/analise_olist.py`: tudo em sequência, sem estrutura, difícil de
+reproduzir. Um notebook carrega esse risco quando *é* o projeto.
+
+Uma vez que catálogo, nós, pipelines e parâmetros já existem — o que essa
+aula inteira ensina —, um notebook que só **lê** o catálogo para visualizar
+(tabela formatada, gráfico inline) não tem esse problema: não guarda lógica
+de negócio, não precisa ser reproduzido, e se sumisse amanhã nada quebraria.
+É exatamente o que o terminal (`kedro ipython`) não faz bem.
+
+Por isso o projeto tem **um único notebook opcional**,
+`projeto/olist_analytics/notebooks/explorar_catalogo.ipynb`:
+
+- usa `%load_ext kedro.ipython` para carregar `catalog`/`context`/`session`
+  — a mesma mecânica do `kedro ipython`, só que dentro de um notebook;
+- mostra uma tabela (`catalog.load("tabela_analitica").head()`) e um gráfico
+  rápido (receita mensal, via `matplotlib`);
+- **nunca é commitado com output executado** — a saída de `catalog.load()`
+  é dado real do Olist, e isso violaria a política de licença de §3.0 tanto
+  quanto um CSV commitado. Sempre `jupyter nbconvert --clear-output --inplace`
+  antes de qualquer commit;
+- na aula, aparece só como menção opcional dentro do bloco do Data Catalog
+  (0:50–1:15) — nunca vira bloco dedicado, nunca é citado como recomendação
+  de fluxo de trabalho para os alunos. `kedro ipython` continua sendo a
+  ferramenta que a aula ensina como principal.
 
 ---
 
@@ -267,8 +296,11 @@ imersao_kedro/
 │   ├── requirements.txt          # versões fixadas
 │   └── setup.md                  # instalação (para o instrutor)
 │
-└── .github/workflows/
-    └── publicar-viz.yml          # kedro viz build → GitHub Pages
+├── scripts/
+│   └── publicar_viz.sh           # kedro viz build local → copia pra docs/
+│
+└── docs/                          # build estático do Kedro-Viz, servido
+                                    # pelo GitHub Pages (main / docs)
 ```
 
 ### 4.1 Decisões de arquitetura e justificativa
@@ -278,7 +310,7 @@ imersao_kedro/
 | `antes/` e `projeto/` coexistem no mesmo repo | A comparação lado a lado **é** a aula. Precisam ser abertos simultaneamente no VS Code |
 | Slides em **Marp** (Markdown), um arquivo único | Versionado no git, diff legível, exporta PDF e HTML por CLI, sem depender de PowerPoint. Um arquivo só porque agora há um encontro só |
 | Roteiro de demo **separado** dos slides | O instrutor lê o roteiro numa segunda tela; os slides vão para o Meet |
-| `kedro viz build` publicado no GitHub Pages | Entregável pós-aula que o aluno explora **sem instalar nada**. É o item de maior valor percebido para esse público. Publicar só após checar o preview de dados (§3.0) |
+| `kedro viz build` local, publicado via GitHub Pages (branch `main`, pasta `docs/`) | Entregável pós-aula que o aluno explora **sem instalar nada**. É o item de maior valor percebido para esse público. Build local (não em CI) porque o dado nunca sai da máquina do instrutor. Publicar só após checar o preview de dados (§3.0) |
 | **Nenhum dado versionado** — nem bruto, nem amostra, nem saída de `reporting` | Resolve a licença CC BY-NC-SA na raiz (§3.0), mantém o repo leve, e o script gerador vira demonstração de reprodutibilidade |
 | Sem branches/tags por etapa | Alunos não codificam. Etapas viram **seções do roteiro**, não estados do git |
 | Projeto Kedro mantém os 5 pipelines mesmo com menos tempo de demo | O corte de §1.3 é de tempo de aula, não de arquitetura — um material mais completo custa pouco a mais para construir e sobra para quem quiser se aprofundar depois |
@@ -484,6 +516,7 @@ em slide só quando for o objeto da explicação (o resto é demo ao vivo).
 **Até 3 dias antes**
 - [ ] Vídeos de backup de todas as demos gravados
 - [ ] `git status` limpo — **nenhum arquivo de dado rastreado** (`git ls-files | grep -i csv` deve vir vazio)
+- [ ] `notebooks/explorar_catalogo.ipynb` sem output executado (`jupyter nbconvert --clear-output --inplace notebooks/explorar_catalogo.ipynb`, depois `git diff` deve vir vazio)
 - [ ] Build do Viz inspecionado: sem prévia de linhas dos datasets embutida
 - [ ] `kedro viz build` publicado no GitHub Pages, URL testada em aba anônima
 - [ ] Slide de créditos do dataset presente

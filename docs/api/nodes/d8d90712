@@ -1,0 +1,12 @@
+{
+  "type": "pandas.csv_dataset.CSVDataset",
+  "filepath": "/home/everton.santi/imersao_kedro/projeto/olist_analytics/data/01_raw/olist_products_dataset.csv",
+  "run_command": null,
+  "preview": null,
+  "preview_type": null,
+  "stats": {
+    "rows": 32787,
+    "columns": 9,
+    "file_size": 2782205
+  }
+}

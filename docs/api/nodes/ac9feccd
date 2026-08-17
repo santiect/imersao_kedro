@@ -1,0 +1,12 @@
+{
+  "type": "pandas.parquet_dataset.ParquetDataset",
+  "filepath": "/home/everton.santi/imersao_kedro/projeto/olist_analytics/data/02_intermediate/produtos_traduzidos.parquet",
+  "run_command": "kedro run --to-outputs=produtos_traduzidos",
+  "preview": null,
+  "preview_type": null,
+  "stats": {
+    "rows": 32787,
+    "columns": 2,
+    "file_size": 1158663
+  }
+}

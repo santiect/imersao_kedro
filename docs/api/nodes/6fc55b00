@@ -1,0 +1,14 @@
+{
+  "code": "def traduzir_categorias(produtos: pd.DataFrame, traducao_categorias: pd.DataFrame) -> pd.DataFrame:\n    \"\"\"Junta o produto com a tradução da categoria (PT -> EN).\n\n    Categorias sem tradução mantêm o nome original em português — é melhor\n    mostrar a categoria em PT do que perder a linha inteira.\n    \"\"\"\n    produtos = produtos.merge(traducao_categorias, on=\"product_category_name\", how=\"left\")\n    produtos[\"product_category_name_english\"] = produtos[\n        \"product_category_name_english\"\n    ].fillna(produtos[\"product_category_name\"])\n    return produtos[[\"product_id\", \"product_category_name_english\"]].rename(\n        columns={\"product_category_name_english\": \"categoria\"}\n    )\n",
+  "filepath": "olist_analytics/src/olist_analytics/pipelines/ingestao/nodes.py",
+  "parameters": {},
+  "run_command": "kedro run --to-nodes='traduzir_categorias'",
+  "inputs": [
+    "olist_produtos_raw",
+    "olist_traducao_categorias_raw"
+  ],
+  "outputs": [
+    "produtos_traduzidos"
+  ],
+  "preview": null
+}

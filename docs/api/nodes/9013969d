@@ -1,0 +1,14 @@
+{
+  "code": "def avaliar_modelo(modelo: RandomForestClassifier, dados_teste: pd.DataFrame) -> dict:\n    \"\"\"Métricas do modelo sobre o conjunto de teste.\"\"\"\n    X = dados_teste[COLUNAS_FEATURES]\n    y = dados_teste[COLUNA_ALVO]\n    y_previsto = modelo.predict(X)\n\n    metricas = {\n        \"acuracia\": round(accuracy_score(y, y_previsto), 4),\n        \"precisao\": round(precision_score(y, y_previsto, zero_division=0), 4),\n        \"revocacao\": round(recall_score(y, y_previsto, zero_division=0), 4),\n        \"f1\": round(f1_score(y, y_previsto, zero_division=0), 4),\n        \"linhas_teste\": len(dados_teste),\n    }\n    logger.info(\"Métricas do modelo: %s\", metricas)\n    return metricas\n",
+  "filepath": "olist_analytics/src/olist_analytics/pipelines/modelagem/nodes.py",
+  "parameters": {},
+  "run_command": "kedro run --to-nodes='avaliar_modelo'",
+  "inputs": [
+    "modelo_review_ruim",
+    "dados_teste"
+  ],
+  "outputs": [
+    "metricas_modelo"
+  ],
+  "preview": null
+}

@@ -1,0 +1,32 @@
+{
+  "code": "def montar_tabela_analitica(df: pd.DataFrame, params: dict) -> pd.DataFrame:\n    \"\"\"Fecha a tabela analítica: aplica regras de negócio e cria o alvo.\n\n    Regras aplicadas, todas configuráveis em parameters.yml (nunca no código):\n    - inclui ou não pedidos cancelados;\n    - considera apenas pedidos entregues (a satisfação pós-entrega não faz\n      sentido para um pedido que não chegou);\n    - define o corte de nota que caracteriza \"cliente insatisfeito\".\n    \"\"\"\n    df = df.copy()\n\n    if not params[\"analise\"][\"incluir_pedidos_cancelados\"]:\n        df = df[df[\"order_status\"] != \"canceled\"]\n\n    df = df[df[\"order_status\"] == \"delivered\"]\n    df = df.dropna(subset=[\"review_score\"])\n\n    corte_nota = params[\"analise\"][\"nota_corte_review_ruim\"]\n    df[\"review_ruim\"] = (df[\"review_score\"] <= corte_nota).astype(int)\n\n    colunas = [\n        \"order_id\",\n        \"customer_state\",\n        \"categoria\",\n        \"order_purchase_timestamp\",\n        \"prazo_entrega_dias\",\n        \"atraso_dias\",\n        \"frete_percentual\",\n        \"n_itens\",\n        \"valor_itens\",\n        \"valor_pago\",\n        \"review_score\",\n        \"review_ruim\",\n    ]\n    tabela = df[colunas].copy()\n    logger.info(\n        \"tabela_analitica: %d pedidos, taxa de review ruim = %.1f%%\",\n        len(tabela),\n        tabela[\"review_ruim\"].mean() * 100,\n    )\n    return tabela\n",
+  "filepath": "olist_analytics/src/olist_analytics/pipelines/features/nodes.py",
+  "parameters": {
+    "periodo": {
+      "inicio": "2017-01-01",
+      "fim": "2018-08-31"
+    },
+    "analise": {
+      "nota_corte_review_ruim": 2,
+      "frete_percentual_maximo": 0.5,
+      "incluir_pedidos_cancelados": false
+    },
+    "relatorio": {
+      "top_n_categorias": 10
+    },
+    "modelo": {
+      "proporcao_teste": 0.25,
+      "semente": 42,
+      "n_estimadores": 200
+    }
+  },
+  "run_command": "kedro run --to-nodes='montar_tabela_analitica'",
+  "inputs": [
+    "pedidos_com_frete",
+    "parameters"
+  ],
+  "outputs": [
+    "tabela_analitica"
+  ],
+  "preview": null
+}

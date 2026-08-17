@@ -50,7 +50,8 @@ a versão certa da planilha ou do dado?
 
 # Uma análise comum
 
-- O Ricardo, da diretoria, pediu um número pra reunião de terça
+- O Ricardo, da diretoria, pediu **a taxa de clientes insatisfeitos** (nota
+  ≤ 2) pra reunião de terça
 - Alguém do time abriu um notebook, escreveu um script, mandou o Excel
 - Funcionou. A reunião aconteceu.
 - Três meses depois, alguém precisa do mesmo número — atualizado
@@ -229,6 +230,8 @@ kedro catalog describe-datasets
 ```
 
 Trocar formato de saída — CSV → Excel — editando só o YAML
+
+*Explorar: `kedro ipython` (principal) ou notebook (opcional, visual)*
 
 ---
 

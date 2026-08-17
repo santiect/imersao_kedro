@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "periodo": {
+      "inicio": "2017-01-01",
+      "fim": "2018-08-31"
+    },
+    "analise": {
+      "nota_corte_review_ruim": 2,
+      "frete_percentual_maximo": 0.5,
+      "incluir_pedidos_cancelados": false
+    },
+    "relatorio": {
+      "top_n_categorias": 10
+    },
+    "modelo": {
+      "proporcao_teste": 0.25,
+      "semente": 42,
+      "n_estimadores": 200
+    }
+  }
+}

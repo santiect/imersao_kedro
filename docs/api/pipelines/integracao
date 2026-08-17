@@ -1,0 +1,311 @@
+{
+  "nodes": [
+    {
+      "id": "f3474cff",
+      "name": "pagamentos_agregados",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao",
+        "integracao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 99091,
+          "columns": 3,
+          "file_size": 3435988
+        },
+        "styles": null
+      },
+      "layer": "intermediate",
+      "dataset_type": "pandas.parquet_dataset.ParquetDataset"
+    },
+    {
+      "id": "cc5bc58b",
+      "name": "avaliacoes_limpas",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao",
+        "integracao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 98329,
+          "columns": 3,
+          "file_size": 3963220
+        },
+        "styles": null
+      },
+      "layer": "intermediate",
+      "dataset_type": "pandas.parquet_dataset.ParquetDataset"
+    },
+    {
+      "id": "5635a0e1",
+      "name": "clientes_limpos",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao",
+        "integracao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 99091,
+          "columns": 4,
+          "file_size": 6826962
+        },
+        "styles": null
+      },
+      "layer": "intermediate",
+      "dataset_type": "pandas.parquet_dataset.ParquetDataset"
+    },
+    {
+      "id": "afcf9a68",
+      "name": "itens_limpos",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao",
+        "integracao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 112279,
+          "columns": 7,
+          "file_size": 6463185
+        },
+        "styles": null
+      },
+      "layer": "intermediate",
+      "dataset_type": "pandas.parquet_dataset.ParquetDataset"
+    },
+    {
+      "id": "07adaebf",
+      "name": "vendedores_limpos",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao",
+        "integracao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 3068,
+          "columns": 3,
+          "file_size": 119606
+        },
+        "styles": null
+      },
+      "layer": "intermediate",
+      "dataset_type": "pandas.parquet_dataset.ParquetDataset"
+    },
+    {
+      "id": "ac9feccd",
+      "name": "produtos_traduzidos",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao",
+        "integracao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 32787,
+          "columns": 2,
+          "file_size": 1158663
+        },
+        "styles": null
+      },
+      "layer": "intermediate",
+      "dataset_type": "pandas.parquet_dataset.ParquetDataset"
+    },
+    {
+      "id": "3ef378fe",
+      "name": "pedidos_filtrados",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "ingestao",
+        "integracao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 99091,
+          "columns": 8,
+          "file_size": 10467603
+        },
+        "styles": null
+      },
+      "layer": "intermediate",
+      "dataset_type": "pandas.parquet_dataset.ParquetDataset"
+    },
+    {
+      "id": "b148bd6d",
+      "name": "montar_pedidos_enriquecidos",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "integracao"
+      ],
+      "type": "task",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "parameters": {},
+      "full_name": "montar_pedidos_enriquecidos"
+    },
+    {
+      "id": "7375706e",
+      "name": "pedidos_enriquecidos",
+      "tags": [],
+      "pipelines": [
+        "features",
+        "__default__",
+        "integracao"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 98353,
+          "columns": 22,
+          "file_size": 16685802
+        },
+        "styles": null
+      },
+      "layer": "primary",
+      "dataset_type": "pandas.parquet_dataset.ParquetDataset"
+    }
+  ],
+  "edges": [
+    {
+      "source": "f3474cff",
+      "target": "b148bd6d"
+    },
+    {
+      "source": "5635a0e1",
+      "target": "b148bd6d"
+    },
+    {
+      "source": "3ef378fe",
+      "target": "b148bd6d"
+    },
+    {
+      "source": "cc5bc58b",
+      "target": "b148bd6d"
+    },
+    {
+      "source": "ac9feccd",
+      "target": "b148bd6d"
+    },
+    {
+      "source": "b148bd6d",
+      "target": "7375706e"
+    },
+    {
+      "source": "afcf9a68",
+      "target": "b148bd6d"
+    },
+    {
+      "source": "07adaebf",
+      "target": "b148bd6d"
+    }
+  ],
+  "layers": [
+    "feature",
+    "intermediate",
+    "model_input",
+    "models",
+    "raw",
+    "reporting",
+    "primary"
+  ],
+  "tags": [],
+  "pipelines": [
+    {
+      "id": "__default__",
+      "name": "__default__"
+    },
+    {
+      "id": "integracao",
+      "name": "integracao"
+    },
+    {
+      "id": "ingestao",
+      "name": "ingestao"
+    },
+    {
+      "id": "relatorio",
+      "name": "relatorio"
+    },
+    {
+      "id": "features",
+      "name": "features"
+    },
+    {
+      "id": "modelagem",
+      "name": "modelagem"
+    }
+  ],
+  "modular_pipelines": {
+    "__root__": {
+      "id": "__root__",
+      "name": "__root__",
+      "inputs": [],
+      "outputs": [],
+      "children": [
+        {
+          "id": "f3474cff",
+          "type": "data"
+        },
+        {
+          "id": "7375706e",
+          "type": "data"
+        },
+        {
+          "id": "5635a0e1",
+          "type": "data"
+        },
+        {
+          "id": "b148bd6d",
+          "type": "task"
+        },
+        {
+          "id": "3ef378fe",
+          "type": "data"
+        },
+        {
+          "id": "cc5bc58b",
+          "type": "data"
+        },
+        {
+          "id": "ac9feccd",
+          "type": "data"
+        },
+        {
+          "id": "afcf9a68",
+          "type": "data"
+        },
+        {
+          "id": "07adaebf",
+          "type": "data"
+        }
+      ]
+    }
+  },
+  "selected_pipeline": "integracao"
+}

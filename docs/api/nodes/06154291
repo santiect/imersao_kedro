@@ -1,0 +1,8 @@
+{
+  "type": "json.json_dataset.JSONDataset",
+  "filepath": "/home/everton.santi/imersao_kedro/projeto/olist_analytics/data/08_reporting/metricas_modelo.json",
+  "run_command": "kedro run --to-outputs=metricas_modelo",
+  "preview": null,
+  "preview_type": null,
+  "stats": null
+}

@@ -1,0 +1,280 @@
+{
+  "nodes": [
+    {
+      "id": "f1f1425b",
+      "name": "parameters",
+      "tags": [],
+      "pipelines": [
+        "ingestao",
+        "__default__",
+        "features",
+        "relatorio",
+        "modelagem"
+      ],
+      "type": "parameters",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "layer": null,
+      "dataset_type": null
+    },
+    {
+      "id": "44bf045b",
+      "name": "tabela_analitica",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "relatorio",
+        "modelagem",
+        "features"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 80423,
+          "columns": 12,
+          "file_size": 5227076
+        },
+        "styles": null
+      },
+      "layer": "feature",
+      "dataset_type": "pandas.parquet_dataset.ParquetDataset"
+    },
+    {
+      "id": "de1f1f6e",
+      "name": "calcular_receita_mensal",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "relatorio"
+      ],
+      "type": "task",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "parameters": {},
+      "full_name": "calcular_receita_mensal"
+    },
+    {
+      "id": "34d489b2",
+      "name": "receita_mensal",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "relatorio"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 20,
+          "columns": 2,
+          "file_size": 381
+        },
+        "styles": null
+      },
+      "layer": "reporting",
+      "dataset_type": "pandas.csv_dataset.CSVDataset"
+    },
+    {
+      "id": "b4ea2783",
+      "name": "calcular_taxa_review_por_estado",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "relatorio"
+      ],
+      "type": "task",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "parameters": {},
+      "full_name": "calcular_taxa_review_por_estado"
+    },
+    {
+      "id": "e6d7984d",
+      "name": "review_por_estado",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "relatorio"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 27,
+          "columns": 3,
+          "file_size": 374
+        },
+        "styles": null
+      },
+      "layer": "reporting",
+      "dataset_type": "pandas.csv_dataset.CSVDataset"
+    },
+    {
+      "id": "f37cba99",
+      "name": "calcular_top_categorias",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "relatorio"
+      ],
+      "type": "task",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "parameters": {
+        "periodo": {
+          "inicio": "2017-01-01",
+          "fim": "2018-08-31"
+        },
+        "analise": {
+          "nota_corte_review_ruim": 2,
+          "frete_percentual_maximo": 0.5,
+          "incluir_pedidos_cancelados": false
+        },
+        "relatorio": {
+          "top_n_categorias": 10
+        },
+        "modelo": {
+          "proporcao_teste": 0.25,
+          "semente": 42,
+          "n_estimadores": 200
+        }
+      },
+      "full_name": "calcular_top_categorias"
+    },
+    {
+      "id": "0756b0c6",
+      "name": "top_categorias",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "relatorio"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 10,
+          "columns": 2,
+          "file_size": 252
+        },
+        "styles": null
+      },
+      "layer": "reporting",
+      "dataset_type": "pandas.csv_dataset.CSVDataset"
+    }
+  ],
+  "edges": [
+    {
+      "source": "f37cba99",
+      "target": "0756b0c6"
+    },
+    {
+      "source": "44bf045b",
+      "target": "f37cba99"
+    },
+    {
+      "source": "f1f1425b",
+      "target": "f37cba99"
+    },
+    {
+      "source": "44bf045b",
+      "target": "b4ea2783"
+    },
+    {
+      "source": "b4ea2783",
+      "target": "e6d7984d"
+    },
+    {
+      "source": "44bf045b",
+      "target": "de1f1f6e"
+    },
+    {
+      "source": "de1f1f6e",
+      "target": "34d489b2"
+    }
+  ],
+  "layers": [
+    "feature",
+    "intermediate",
+    "model_input",
+    "models",
+    "primary",
+    "raw",
+    "reporting"
+  ],
+  "tags": [],
+  "pipelines": [
+    {
+      "id": "__default__",
+      "name": "__default__"
+    },
+    {
+      "id": "integracao",
+      "name": "integracao"
+    },
+    {
+      "id": "ingestao",
+      "name": "ingestao"
+    },
+    {
+      "id": "relatorio",
+      "name": "relatorio"
+    },
+    {
+      "id": "features",
+      "name": "features"
+    },
+    {
+      "id": "modelagem",
+      "name": "modelagem"
+    }
+  ],
+  "modular_pipelines": {
+    "__root__": {
+      "id": "__root__",
+      "name": "__root__",
+      "inputs": [],
+      "outputs": [],
+      "children": [
+        {
+          "id": "f37cba99",
+          "type": "task"
+        },
+        {
+          "id": "e6d7984d",
+          "type": "data"
+        },
+        {
+          "id": "b4ea2783",
+          "type": "task"
+        },
+        {
+          "id": "f1f1425b",
+          "type": "parameters"
+        },
+        {
+          "id": "44bf045b",
+          "type": "data"
+        },
+        {
+          "id": "34d489b2",
+          "type": "data"
+        },
+        {
+          "id": "de1f1f6e",
+          "type": "task"
+        },
+        {
+          "id": "0756b0c6",
+          "type": "data"
+        },
+        {
+          "id": "f1f1425b",
+          "type": "data"
+        }
+      ]
+    }
+  },
+  "selected_pipeline": "relatorio"
+}

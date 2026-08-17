@@ -1,0 +1,13 @@
+{
+  "code": "def limpar_vendedores(vendedores: pd.DataFrame) -> pd.DataFrame:\n    \"\"\"Mantém a localização do vendedor.\"\"\"\n    return vendedores[[\"seller_id\", \"seller_city\", \"seller_state\"]].copy()\n",
+  "filepath": "olist_analytics/src/olist_analytics/pipelines/ingestao/nodes.py",
+  "parameters": {},
+  "run_command": "kedro run --to-nodes='limpar_vendedores'",
+  "inputs": [
+    "olist_vendedores_raw"
+  ],
+  "outputs": [
+    "vendedores_limpos"
+  ],
+  "preview": null
+}

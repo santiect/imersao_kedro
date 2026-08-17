@@ -1,0 +1,13 @@
+{
+  "code": "def calcular_taxa_review_por_estado(tabela_analitica: pd.DataFrame) -> pd.DataFrame:\n    \"\"\"Percentual de pedidos com review ruim, por estado do cliente.\"\"\"\n    return (\n        tabela_analitica.groupby(\"customer_state\")\n        .agg(taxa_review_ruim=(\"review_ruim\", \"mean\"), n_pedidos=(\"order_id\", \"count\"))\n        .assign(taxa_review_ruim=lambda d: (d[\"taxa_review_ruim\"] * 100).round(1))\n        .sort_values(\"taxa_review_ruim\", ascending=False)\n        .reset_index()\n    )\n",
+  "filepath": "olist_analytics/src/olist_analytics/pipelines/relatorio/nodes.py",
+  "parameters": {},
+  "run_command": "kedro run --to-nodes='calcular_taxa_review_por_estado'",
+  "inputs": [
+    "tabela_analitica"
+  ],
+  "outputs": [
+    "review_por_estado"
+  ],
+  "preview": null
+}

@@ -1,0 +1,13 @@
+{
+  "code": "def calcular_atraso(df: pd.DataFrame) -> pd.DataFrame:\n    \"\"\"Dias de atraso: entrega real menos estimada. Negativo = entregue antes.\"\"\"\n    df = df.copy()\n    df[\"atraso_dias\"] = (\n        df[\"order_delivered_customer_date\"] - df[\"order_estimated_delivery_date\"]\n    ).dt.days\n    return df\n",
+  "filepath": "olist_analytics/src/olist_analytics/pipelines/features/nodes.py",
+  "parameters": {},
+  "run_command": "kedro run --to-nodes='calcular_atraso'",
+  "inputs": [
+    "pedidos_com_prazo"
+  ],
+  "outputs": [
+    "pedidos_com_atraso"
+  ],
+  "preview": null
+}

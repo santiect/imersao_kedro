@@ -1,0 +1,12 @@
+{
+  "type": "pandas.csv_dataset.CSVDataset",
+  "filepath": "/home/everton.santi/imersao_kedro/projeto/olist_analytics/data/08_reporting/review_por_estado.csv",
+  "run_command": "kedro run --to-outputs=review_por_estado",
+  "preview": null,
+  "preview_type": null,
+  "stats": {
+    "rows": 27,
+    "columns": 3,
+    "file_size": 374
+  }
+}

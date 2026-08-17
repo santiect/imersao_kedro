@@ -33,25 +33,44 @@ nada.
    documento que você segue numa segunda tela. O protocolo pra quando algo
    quebra ao vivo está em [`roteiros/plano-b.md`](roteiros/plano-b.md).
 5. **Os slides** estão em [`slides/aula.md`](slides/aula.md) (Marp). Para
-   exportar em PDF:
+   exportar em PDF (requer Node.js — `node --version` pra conferir):
    ```bash
    npx @marp-team/marp-cli slides/aula.md --pdf --allow-local-files --theme-set slides/tema/imersao.css
    ```
+   Gera `slides/aula.pdf`.
+6. **O cheatsheet do aluno** (`material-aluno/cheatsheet.md`) não é slide —
+   é documento de 1 página A4, exportado com `md-to-pdf` (Marp não pagina
+   documento fluido, só corta):
+   ```bash
+   npx md-to-pdf material-aluno/cheatsheet.md \
+     --pdf-options '{"format":"A4","margin":{"top":"10mm","bottom":"10mm","left":"12mm","right":"12mm"},"printBackground":true}' \
+     --css "body{font-family:sans-serif;font-size:10.5px;line-height:1.3;color:#1a1a2e} h1{font-size:19px;margin:0 0 2px} h2{font-size:13px;margin:9px 0 3px;color:#0f172a} table{width:100%;border-collapse:collapse;font-size:9.5px;margin:4px 0} th,td{border:1px solid #cbd5e1;padding:2px 6px;text-align:left} th{background:#f1f5f9} code{background:#f1f5f9;padding:1px 4px;border-radius:3px;font-size:0.9em} pre{background:#f1f5f9;padding:6px;border-radius:6px;font-size:9px;margin:4px 0} em{color:#334155} ul{margin:3px 0;padding-left:18px} li{margin:1px 0}"
+   ```
+   Gera `material-aluno/cheatsheet.pdf` — testado, cabe numa página só.
 
 Antes de ensaiar, leia [`PLANO.md`](PLANO.md) inteiro — é o desenho completo
 da aula (agenda, narrativa, riscos, checklist de pré-produção em §9).
 
 ### Publicar o Kedro-Viz (opcional)
 
-Existe um workflow pronto (`.github/workflows/publicar-viz.yml`) que gera e
-publica o grafo interativo no GitHub Pages. Ele **não roda sozinho** — para
-ativar:
+O build é local — sem workflow, sem secrets do Kaggle. Você builda na sua
+máquina (onde o dado já está) e publica via GitHub Pages servindo a pasta
+`docs/` da branch `main`.
 
-1. Vá em Settings → Pages e habilite GitHub Pages para o repositório.
-2. Vá em Settings → Secrets and variables → Actions e cadastre
-   `KAGGLE_USERNAME` e `KAGGLE_KEY` (sua chave de API do Kaggle, gerada em
-   kaggle.com/settings).
-3. Vá na aba Actions → "Publicar Kedro-Viz" → "Run workflow".
+1. Ative uma vez: Settings → Pages → Source = "Deploy from a branch" →
+   branch `main`, pasta `/docs`.
+2. Sempre que quiser atualizar o grafo publicado:
+   ```bash
+   bash scripts/publicar_viz.sh
+   ```
+   Isso roda `kedro viz build` e copia o resultado pra `docs/`.
+3. **Antes de commitar**, confira se o build não embutiu prévia de linhas
+   dos datasets (licença CC BY-NC-SA do Olist — ver `PLANO.md` §3.0):
+   ```bash
+   grep -rl '"preview": [^n]' docs/api/nodes/ || echo "ok, nenhum preview embutido"
+   ```
+4. `git add docs && git commit && git push` — o Pages atualiza sozinho em
+   ~1 min.
 
 O link publicado é o principal entregável pós-aula: os alunos exploram o
 grafo do projeto sem instalar nada.

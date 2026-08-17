@@ -1,0 +1,32 @@
+{
+  "code": "def treinar_modelo(dados_treino: pd.DataFrame, params: dict) -> RandomForestClassifier:\n    \"\"\"Treina um Random Forest para prever review_ruim.\"\"\"\n    X = dados_treino[COLUNAS_FEATURES]\n    y = dados_treino[COLUNA_ALVO]\n\n    modelo = RandomForestClassifier(\n        n_estimators=params[\"modelo\"][\"n_estimadores\"],\n        random_state=params[\"modelo\"][\"semente\"],\n    )\n    modelo.fit(X, y)\n    return modelo\n",
+  "filepath": "olist_analytics/src/olist_analytics/pipelines/modelagem/nodes.py",
+  "parameters": {
+    "periodo": {
+      "inicio": "2017-01-01",
+      "fim": "2018-08-31"
+    },
+    "analise": {
+      "nota_corte_review_ruim": 2,
+      "frete_percentual_maximo": 0.5,
+      "incluir_pedidos_cancelados": false
+    },
+    "relatorio": {
+      "top_n_categorias": 10
+    },
+    "modelo": {
+      "proporcao_teste": 0.25,
+      "semente": 42,
+      "n_estimadores": 200
+    }
+  },
+  "run_command": "kedro run --to-nodes='treinar_modelo'",
+  "inputs": [
+    "dados_treino",
+    "parameters"
+  ],
+  "outputs": [
+    "modelo_review_ruim"
+  ],
+  "preview": null
+}

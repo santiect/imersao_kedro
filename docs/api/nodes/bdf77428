@@ -1,0 +1,13 @@
+{
+  "code": "def limpar_clientes(clientes: pd.DataFrame) -> pd.DataFrame:\n    \"\"\"Mantém a localização do cliente.\"\"\"\n    return clientes[\n        [\"customer_id\", \"customer_unique_id\", \"customer_city\", \"customer_state\"]\n    ].copy()\n",
+  "filepath": "olist_analytics/src/olist_analytics/pipelines/ingestao/nodes.py",
+  "parameters": {},
+  "run_command": "kedro run --to-nodes='limpar_clientes'",
+  "inputs": [
+    "olist_clientes_raw"
+  ],
+  "outputs": [
+    "clientes_limpos"
+  ],
+  "preview": null
+}

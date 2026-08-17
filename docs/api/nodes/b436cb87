@@ -1,0 +1,32 @@
+{
+  "code": "def filtrar_pedidos_por_periodo(pedidos_limpos: pd.DataFrame, params: dict) -> pd.DataFrame:\n    \"\"\"Recorta os pedidos para o período de análise definido em parameters.yml.\n\n    Esta é a demonstração central de \"config fora do código\": mudar o período\n    da análise é editar uma data em YAML, não caçar um valor no meio do script.\n    \"\"\"\n    inicio = pd.Timestamp(params[\"periodo\"][\"inicio\"])\n    fim = pd.Timestamp(params[\"periodo\"][\"fim\"])\n    filtrados = pedidos_limpos[\n        pedidos_limpos[\"order_purchase_timestamp\"].between(inicio, fim)\n    ].copy()\n    logger.info(\n        \"Período %s a %s: %d de %d pedidos\",\n        inicio.date(),\n        fim.date(),\n        len(filtrados),\n        len(pedidos_limpos),\n    )\n    return filtrados\n",
+  "filepath": "olist_analytics/src/olist_analytics/pipelines/ingestao/nodes.py",
+  "parameters": {
+    "periodo": {
+      "inicio": "2017-01-01",
+      "fim": "2018-08-31"
+    },
+    "analise": {
+      "nota_corte_review_ruim": 2,
+      "frete_percentual_maximo": 0.5,
+      "incluir_pedidos_cancelados": false
+    },
+    "relatorio": {
+      "top_n_categorias": 10
+    },
+    "modelo": {
+      "proporcao_teste": 0.25,
+      "semente": 42,
+      "n_estimadores": 200
+    }
+  },
+  "run_command": "kedro run --to-nodes='filtrar_pedidos_por_periodo'",
+  "inputs": [
+    "pedidos_limpos",
+    "parameters"
+  ],
+  "outputs": [
+    "pedidos_filtrados"
+  ],
+  "preview": null
+}

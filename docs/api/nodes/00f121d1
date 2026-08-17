@@ -1,0 +1,32 @@
+{
+  "code": "def calcular_peso_frete(df: pd.DataFrame, params: dict) -> pd.DataFrame:\n    \"\"\"Frete como percentual do valor dos itens; descarta outliers acima do corte.\"\"\"\n    df = df.copy()\n    df[\"frete_percentual\"] = df[\"frete_total\"] / df[\"valor_itens\"]\n\n    corte = params[\"analise\"][\"frete_percentual_maximo\"]\n    antes = len(df)\n    df = df[df[\"frete_percentual\"] <= corte].copy()\n    logger.info(\n        \"Corte de frete (%.0f%%): %d de %d pedidos mantidos\", corte * 100, len(df), antes\n    )\n    return df\n",
+  "filepath": "olist_analytics/src/olist_analytics/pipelines/features/nodes.py",
+  "parameters": {
+    "periodo": {
+      "inicio": "2017-01-01",
+      "fim": "2018-08-31"
+    },
+    "analise": {
+      "nota_corte_review_ruim": 2,
+      "frete_percentual_maximo": 0.5,
+      "incluir_pedidos_cancelados": false
+    },
+    "relatorio": {
+      "top_n_categorias": 10
+    },
+    "modelo": {
+      "proporcao_teste": 0.25,
+      "semente": 42,
+      "n_estimadores": 200
+    }
+  },
+  "run_command": "kedro run --to-nodes='calcular_peso_frete'",
+  "inputs": [
+    "pedidos_com_atraso",
+    "parameters"
+  ],
+  "outputs": [
+    "pedidos_com_frete"
+  ],
+  "preview": null
+}

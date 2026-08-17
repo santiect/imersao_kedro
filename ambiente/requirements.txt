@@ -14,4 +14,9 @@ scikit-learn==1.5.2
 openpyxl==3.1.5
 matplotlib==3.9.2
 
+# Notebook: uso opcional e secundário (visualização), nunca a ferramenta
+# principal de exploração — essa é `kedro ipython`. Ver CLAUDE.md.
+notebook==7.6.2
+ipykernel==7.3.0
+
 pytest==8.3.3

@@ -1,0 +1,14 @@
+{
+  "code": "def calcular_importancia_features(\n    modelo: RandomForestClassifier, dados_treino: pd.DataFrame\n) -> pd.DataFrame:\n    \"\"\"Quais variáveis mais pesam na previsão — o argumento de negócio do modelo.\"\"\"\n    return pd.DataFrame(\n        {\n            \"variavel\": COLUNAS_FEATURES,\n            \"importancia\": modelo.feature_importances_.round(4),\n        }\n    ).sort_values(\"importancia\", ascending=False)\n",
+  "filepath": "olist_analytics/src/olist_analytics/pipelines/modelagem/nodes.py",
+  "parameters": {},
+  "run_command": "kedro run --to-nodes='calcular_importancia_features'",
+  "inputs": [
+    "modelo_review_ruim",
+    "dados_treino"
+  ],
+  "outputs": [
+    "importancia_features"
+  ],
+  "preview": null
+}

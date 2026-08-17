@@ -60,9 +60,12 @@ substituir sem afetar o resto.
 
 **Notebook**
 Um formato de documento interativo (ex.: Jupyter) que mistura código,
-resultado e texto na mesma tela. Ótimo para explorar uma ideia; frágil para
-sustentar um processo que precisa rodar sempre do mesmo jeito — por isso esta
-imersão não usa notebook.
+resultado e texto na mesma tela. Ótimo para explorar uma ideia; frágil quando
+vira o projeto inteiro, porque fica difícil garantir que ele sempre roda do
+mesmo jeito — foi exatamente esse o problema do script mostrado no início da
+aula. Uma vez que o projeto já está estruturado, um notebook pequeno que só
+*olha* o catálogo (sem guardar lógica) volta a ser seguro — é o único uso
+que este material recomenda.
 
 **Open source (código aberto)**
 Software cujo código é público e pode ser usado, inspecionado e modificado

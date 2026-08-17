@@ -1,0 +1,12 @@
+{
+  "type": "pandas.csv_dataset.CSVDataset",
+  "filepath": "/home/everton.santi/imersao_kedro/projeto/olist_analytics/data/01_raw/product_category_name_translation.csv",
+  "run_command": null,
+  "preview": null,
+  "preview_type": null,
+  "stats": {
+    "rows": 71,
+    "columns": 2,
+    "file_size": 2540
+  }
+}

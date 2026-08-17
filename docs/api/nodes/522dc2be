@@ -1,0 +1,13 @@
+{
+  "code": "def limpar_pedidos(pedidos: pd.DataFrame) -> pd.DataFrame:\n    \"\"\"Tipa as datas do ciclo de vida do pedido.\"\"\"\n    pedidos = pedidos.copy()\n    for coluna in COLUNAS_DATA_PEDIDOS:\n        pedidos[coluna] = pd.to_datetime(pedidos[coluna])\n    return pedidos\n",
+  "filepath": "olist_analytics/src/olist_analytics/pipelines/ingestao/nodes.py",
+  "parameters": {},
+  "run_command": "kedro run --to-nodes='limpar_pedidos'",
+  "inputs": [
+    "olist_pedidos_raw"
+  ],
+  "outputs": [
+    "pedidos_limpos"
+  ],
+  "preview": null
+}

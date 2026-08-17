@@ -1,0 +1,13 @@
+{
+  "code": "def limpar_avaliacoes(avaliacoes: pd.DataFrame) -> pd.DataFrame:\n    \"\"\"Mantém a avaliação mais recente por pedido, quando há mais de uma.\"\"\"\n    avaliacoes = avaliacoes.copy()\n    avaliacoes[\"review_creation_date\"] = pd.to_datetime(avaliacoes[\"review_creation_date\"])\n    avaliacoes = avaliacoes.sort_values(\"review_creation_date\").drop_duplicates(\n        \"order_id\", keep=\"last\"\n    )\n    return avaliacoes[[\"order_id\", \"review_score\", \"review_creation_date\"]]\n",
+  "filepath": "olist_analytics/src/olist_analytics/pipelines/ingestao/nodes.py",
+  "parameters": {},
+  "run_command": "kedro run --to-nodes='limpar_avaliacoes'",
+  "inputs": [
+    "olist_avaliacoes_raw"
+  ],
+  "outputs": [
+    "avaliacoes_limpas"
+  ],
+  "preview": null
+}

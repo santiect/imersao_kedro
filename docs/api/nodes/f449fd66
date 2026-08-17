@@ -1,0 +1,13 @@
+{
+  "code": "def agregar_pagamentos(pagamentos: pd.DataFrame) -> pd.DataFrame:\n    \"\"\"Consolida os pagamentos por pedido: valor total e nº de formas usadas.\n\n    Um pedido pode ter mais de uma linha de pagamento (ex.: cartão + boleto).\n    \"\"\"\n    return (\n        pagamentos.groupby(\"order_id\")\n        .agg(\n            valor_pago=(\"payment_value\", \"sum\"),\n            formas_pagamento=(\"payment_type\", \"nunique\"),\n        )\n        .reset_index()\n    )\n",
+  "filepath": "olist_analytics/src/olist_analytics/pipelines/ingestao/nodes.py",
+  "parameters": {},
+  "run_command": "kedro run --to-nodes='agregar_pagamentos'",
+  "inputs": [
+    "olist_pagamentos_raw"
+  ],
+  "outputs": [
+    "pagamentos_agregados"
+  ],
+  "preview": null
+}

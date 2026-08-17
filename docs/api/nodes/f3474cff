@@ -1,0 +1,12 @@
+{
+  "type": "pandas.parquet_dataset.ParquetDataset",
+  "filepath": "/home/everton.santi/imersao_kedro/projeto/olist_analytics/data/02_intermediate/pagamentos_agregados.parquet",
+  "run_command": "kedro run --to-outputs=pagamentos_agregados",
+  "preview": null,
+  "preview_type": null,
+  "stats": {
+    "rows": 99091,
+    "columns": 3,
+    "file_size": 3435988
+  }
+}

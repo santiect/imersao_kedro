@@ -1,0 +1,12 @@
+{
+  "type": "pandas.parquet_dataset.ParquetDataset",
+  "filepath": "/home/everton.santi/imersao_kedro/projeto/olist_analytics/data/02_intermediate/clientes_limpos.parquet",
+  "run_command": "kedro run --to-outputs=clientes_limpos",
+  "preview": null,
+  "preview_type": null,
+  "stats": {
+    "rows": 99091,
+    "columns": 4,
+    "file_size": 6826962
+  }
+}

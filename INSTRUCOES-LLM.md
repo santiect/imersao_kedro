@@ -172,9 +172,18 @@ Depois implemente conforme `PLANO.md` §5. Requisitos de aceite:
   (Excel ou CSV), porque vão ser abertos na tela.
 - **Testes** — `pytest` cobrindo os 4 nós de `features`. Poucos e rápidos; eles
   existem para o slide de testes, não para cobertura.
+- **`notebooks/explorar_catalogo.ipynb`** — um único notebook opcional, só
+  para visualização via `%load_ext kedro.ipython` + `catalog.load(...)`.
+  Sem lógica de pipeline. **Testar a execução de verdade** (ex.:
+  `jupyter nbconvert --to notebook --execute` rodado a partir da pasta
+  `notebooks/`, para o Kedro achar o projeto) e depois **limpar os outputs**
+  antes de deixar o arquivo no repositório —
+  `jupyter nbconvert --clear-output --inplace notebooks/explorar_catalogo.ipynb`.
+  Ver regra 1 de §12.
 
 **Critério de aceite da etapa:** `kedro run` completa sem erro em < 60s a partir
-da amostra, e `kedro viz run` renderiza o grafo com as camadas coloridas.
+da amostra, `kedro viz run` renderiza o grafo com as camadas coloridas, e
+`notebooks/explorar_catalogo.ipynb` executa sem erro e está commitado sem output.
 
 ---
 
@@ -329,9 +338,16 @@ Inclua a agenda resumida da aula (3h, sessão única) e a nota de licença do Ol
 
 ## 12. Regras invioláveis
 
-1. **Zero Jupyter Notebook.** Nenhum `.ipynb`, nenhuma menção como ferramenta
-   recomendada. Exploração interativa é `kedro ipython`. A pasta `notebooks/`
-   gerada pelo `kedro new` deve ser removida.
+1. **`kedro ipython` é a ferramenta principal de exploração — notebook é
+   secundário e opcional, não a recomendação de fluxo de trabalho.** Existe
+   exatamente **um** notebook no projeto,
+   `projeto/olist_analytics/notebooks/explorar_catalogo.ipynb`, só para
+   visualização (tabela formatada, gráfico), sem lógica de pipeline. Ele
+   **nunca** é commitado com output executado — a saída de `catalog.load()`
+   é dado real do Olist, e isso violaria a política de licença de §3.0 do
+   `PLANO.md` tanto quanto um CSV commitado. Antes de qualquer commit:
+   `jupyter nbconvert --clear-output --inplace notebooks/explorar_catalogo.ipynb`.
+   Ver `CLAUDE.md` para o racional completo.
 2. **Nenhuma API removida no Kedro 1.x.** Consulte `PLANO.md` §2.1 e valide
    contra a documentação oficial.
 3. **Não invente números.** Estatísticas do dataset (nº de pedidos, % de nulos)

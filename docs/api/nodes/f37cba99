@@ -1,0 +1,32 @@
+{
+  "code": "def calcular_top_categorias(tabela_analitica: pd.DataFrame, params: dict) -> pd.DataFrame:\n    \"\"\"As N categorias de produto com maior receita em itens.\"\"\"\n    n = params.get(\"relatorio\", {}).get(\"top_n_categorias\", 10)\n    return (\n        tabela_analitica.groupby(\"categoria\")[\"valor_itens\"]\n        .sum()\n        .round(2)\n        .sort_values(ascending=False)\n        .head(n)\n        .reset_index()\n        .rename(columns={\"valor_itens\": \"receita_itens\"})\n    )\n",
+  "filepath": "olist_analytics/src/olist_analytics/pipelines/relatorio/nodes.py",
+  "parameters": {
+    "periodo": {
+      "inicio": "2017-01-01",
+      "fim": "2018-08-31"
+    },
+    "analise": {
+      "nota_corte_review_ruim": 2,
+      "frete_percentual_maximo": 0.5,
+      "incluir_pedidos_cancelados": false
+    },
+    "relatorio": {
+      "top_n_categorias": 10
+    },
+    "modelo": {
+      "proporcao_teste": 0.25,
+      "semente": 42,
+      "n_estimadores": 200
+    }
+  },
+  "run_command": "kedro run --to-nodes='calcular_top_categorias'",
+  "inputs": [
+    "tabela_analitica",
+    "parameters"
+  ],
+  "outputs": [
+    "top_categorias"
+  ],
+  "preview": null
+}

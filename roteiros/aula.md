@@ -85,8 +85,9 @@ FileNotFoundError: [Errno 2] No such file or directory: 'C:/Users/everton/Downlo
 ```
 
 ### O que falar
-- Slides 5–6: contextualizar — "o Ricardo, da diretoria, pediu uma análise
-  pra reunião de terça. Alguém do time fez isso." Abrir o arquivo
+- Slides 5–6: contextualizar — "o Ricardo, da diretoria, pediu a taxa de
+  clientes insatisfeitos — nota de review ≤ 2 — pra reunião de terça. Alguém
+  do time fez isso." Abrir o arquivo
   `analise_olist.py` na tela (VS Code, fonte grande).
 - Rodar o comando acima. Deixar o erro aparecer sem cortar.
 - **Dor #1 (linha 14):** "isso funcionou na máquina de quem escreveu.
@@ -112,9 +113,11 @@ FileNotFoundError: [Errno 2] No such file or directory: 'C:/Users/everton/Downlo
 - **"Isso é exagero, ninguém escreve código assim"** → "Esse código roda de
   verdade com os dados reais do Olist — testei antes da aula. E se você já
   trabalhou com dado, provavelmente já viu pior."
-- **"Por que não usar um notebook Jupyter?"** → Guardar para o bloco "o que é
-  Kedro" (slide 15) — notebook tem exatamente os mesmos 4 problemas, só que
-  escondidos em células.
+- **"Por que não usar um notebook Jupyter?"** → A crítica não é ao notebook em
+  si, é a **isso aqui ser o projeto inteiro**: tudo em sequência, sem
+  estrutura, dentro de células — os mesmos 4 problemas, só escondidos. Um
+  notebook pequeno, que só olha um catálogo já estruturado, é outra
+  conversa — tem um lá no projeto, mostro mais adiante.
 
 ### Se der errado
 O comando é *desenhado* para falhar — não há "der errado" aqui, a única forma
@@ -221,6 +224,17 @@ catalog.load("tabela_analitica").head()
 exit
 ```
 
+**Extra opcional, só se sobrar tempo** (não é orçado nos 25 min do bloco —
+nunca atrasar o próximo bloco por causa disso):
+```bash
+kedro jupyter notebook
+```
+Abrir `notebooks/explorar_catalogo.ipynb`, rodar as células, mostrar a tabela
+formatada e o gráfico de receita mensal. **Depois de mostrar, fechar sem
+salvar** (ou rodar `jupyter nbconvert --clear-output --inplace
+notebooks/explorar_catalogo.ipynb` antes de sair) — o notebook não pode ficar
+com output no repositório.
+
 ### O que falar
 - "Isso aqui substitui as 8 linhas de `pd.read_csv` com caminho fixo que
   vimos há pouco. Cada dataset tem um nome, um lugar, um formato — declarados
@@ -229,8 +243,12 @@ exit
   Troquei duas linhas de configuração e o node que gera esse relatório nem
   sabe que mudou de formato."
 - No `kedro ipython`: "e se eu quiser só espiar um dado, sem escrever um
-  script? Uso isso — é um terminal Python com o catálogo já carregado. Sem
-  notebook, sem célula fora de ordem."
+  script? Uso isso — é um terminal Python com o catálogo já carregado."
+- *(se fizer o extra do notebook)*: "e se eu quiser ver isso mais visual, com
+  gráfico? O mesmo catálogo funciona dentro de um notebook também — a
+  diferença é que aqui ele não guarda nenhuma lógica do projeto, só olha o
+  que já existe. O risco que vimos no início da aula era usar notebook como
+  o projeto inteiro, não usar notebook."
 - Slide 19 (camadas): "Essa numeração de pastas — 01 a 08 — é convenção do
   Kedro. É o mesmo princípio do Medallion/Lakehouse que muita empresa já usa:
   dado bruto nunca se mistura com dado tratado."
@@ -390,6 +408,19 @@ bloqueante; use a Aba B só se precisar editar código durante o autoreload
   publicado.
 - **"Dá pra exportar isso como imagem/PDF?"** → Sim, o Kedro-Viz tem opção de
   exportar PNG do grafo.
+- **"88% de acurácia é bom?"** (se alguém perguntar ao ver `metricas_modelo.json`)
+  → **Não caia na armadilha de confirmar que é bom.** Só 12,6% dos pedidos têm
+  review ruim — um modelo preguiçoso que sempre chuta "não é ruim" já acertaria
+  uns 87% sem aprender nada. 88,8% é só um pouco melhor que isso.
+  O número que importa aqui é a **revocação: 28%** — de todo cliente que
+  realmente ficou insatisfeito, o modelo só identificou 28%, deixou passar 72%.
+  **F1 (0,39)** resume isso — combina precisão (63%, "quando o modelo grita
+  'ruim', acerta 63% das vezes") com essa revocação baixa, e por isso sai
+  puxado pra baixo. Frase pronta: *"O modelo acerta muito no geral porque a
+  maioria dos pedidos é normal — o que interessa pro negócio é que ele só
+  pega 1 em cada 4 clientes insatisfeitos. É ponto de partida, não produto
+  pronto."* Não se alongar mais que isso — é uma resposta de 30s, não um
+  bloco novo.
 
 ### Se der errado
 Se o servidor não subir (porta ocupada), `kedro viz run --port 4142`. Se o

@@ -1,0 +1,13 @@
+{
+  "code": "def limpar_itens(itens: pd.DataFrame) -> pd.DataFrame:\n    \"\"\"Tipa a data limite de envio de cada item.\"\"\"\n    itens = itens.copy()\n    itens[\"shipping_limit_date\"] = pd.to_datetime(itens[\"shipping_limit_date\"])\n    return itens\n",
+  "filepath": "olist_analytics/src/olist_analytics/pipelines/ingestao/nodes.py",
+  "parameters": {},
+  "run_command": "kedro run --to-nodes='limpar_itens'",
+  "inputs": [
+    "olist_itens_raw"
+  ],
+  "outputs": [
+    "itens_limpos"
+  ],
+  "preview": null
+}

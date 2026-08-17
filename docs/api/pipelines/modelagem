@@ -1,0 +1,376 @@
+{
+  "nodes": [
+    {
+      "id": "f1f1425b",
+      "name": "parameters",
+      "tags": [],
+      "pipelines": [
+        "ingestao",
+        "__default__",
+        "features",
+        "relatorio",
+        "modelagem"
+      ],
+      "type": "parameters",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "layer": null,
+      "dataset_type": null
+    },
+    {
+      "id": "44bf045b",
+      "name": "tabela_analitica",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "relatorio",
+        "modelagem",
+        "features"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 80423,
+          "columns": 12,
+          "file_size": 5227076
+        },
+        "styles": null
+      },
+      "layer": "feature",
+      "dataset_type": "pandas.parquet_dataset.ParquetDataset"
+    },
+    {
+      "id": "04806414",
+      "name": "dividir_treino_teste",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "modelagem"
+      ],
+      "type": "task",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "parameters": {
+        "periodo": {
+          "inicio": "2017-01-01",
+          "fim": "2018-08-31"
+        },
+        "analise": {
+          "nota_corte_review_ruim": 2,
+          "frete_percentual_maximo": 0.5,
+          "incluir_pedidos_cancelados": false
+        },
+        "relatorio": {
+          "top_n_categorias": 10
+        },
+        "modelo": {
+          "proporcao_teste": 0.25,
+          "semente": 42,
+          "n_estimadores": 200
+        }
+      },
+      "full_name": "dividir_treino_teste"
+    },
+    {
+      "id": "44f91f3b",
+      "name": "dados_treino",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "modelagem"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 60311,
+          "columns": 6,
+          "file_size": 1014261
+        },
+        "styles": null
+      },
+      "layer": "model_input",
+      "dataset_type": "pandas.parquet_dataset.ParquetDataset"
+    },
+    {
+      "id": "305d9307",
+      "name": "dados_teste",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "modelagem"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 20104,
+          "columns": 6,
+          "file_size": 366503
+        },
+        "styles": null
+      },
+      "layer": "model_input",
+      "dataset_type": "pandas.parquet_dataset.ParquetDataset"
+    },
+    {
+      "id": "516e9ba5",
+      "name": "treinar_modelo",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "modelagem"
+      ],
+      "type": "task",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "parameters": {
+        "periodo": {
+          "inicio": "2017-01-01",
+          "fim": "2018-08-31"
+        },
+        "analise": {
+          "nota_corte_review_ruim": 2,
+          "frete_percentual_maximo": 0.5,
+          "incluir_pedidos_cancelados": false
+        },
+        "relatorio": {
+          "top_n_categorias": 10
+        },
+        "modelo": {
+          "proporcao_teste": 0.25,
+          "semente": 42,
+          "n_estimadores": 200
+        }
+      },
+      "full_name": "treinar_modelo"
+    },
+    {
+      "id": "52eabac6",
+      "name": "modelo_review_ruim",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "modelagem"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "layer": "models",
+      "dataset_type": "pickle.pickle_dataset.PickleDataset"
+    },
+    {
+      "id": "9013969d",
+      "name": "avaliar_modelo",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "modelagem"
+      ],
+      "type": "task",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "parameters": {},
+      "full_name": "avaliar_modelo"
+    },
+    {
+      "id": "06154291",
+      "name": "metricas_modelo",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "modelagem"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "layer": "reporting",
+      "dataset_type": "json.json_dataset.JSONDataset"
+    },
+    {
+      "id": "abba6963",
+      "name": "calcular_importancia_features",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "modelagem"
+      ],
+      "type": "task",
+      "modular_pipelines": null,
+      "node_extras": null,
+      "parameters": {},
+      "full_name": "calcular_importancia_features"
+    },
+    {
+      "id": "1a338160",
+      "name": "importancia_features",
+      "tags": [],
+      "pipelines": [
+        "__default__",
+        "modelagem"
+      ],
+      "type": "data",
+      "modular_pipelines": null,
+      "node_extras": {
+        "stats": {
+          "rows": 5,
+          "columns": 2,
+          "file_size": 124
+        },
+        "styles": null
+      },
+      "layer": "reporting",
+      "dataset_type": "pandas.csv_dataset.CSVDataset"
+    }
+  ],
+  "edges": [
+    {
+      "source": "04806414",
+      "target": "305d9307"
+    },
+    {
+      "source": "abba6963",
+      "target": "1a338160"
+    },
+    {
+      "source": "44bf045b",
+      "target": "04806414"
+    },
+    {
+      "source": "9013969d",
+      "target": "06154291"
+    },
+    {
+      "source": "516e9ba5",
+      "target": "52eabac6"
+    },
+    {
+      "source": "52eabac6",
+      "target": "9013969d"
+    },
+    {
+      "source": "44f91f3b",
+      "target": "abba6963"
+    },
+    {
+      "source": "f1f1425b",
+      "target": "04806414"
+    },
+    {
+      "source": "305d9307",
+      "target": "9013969d"
+    },
+    {
+      "source": "52eabac6",
+      "target": "abba6963"
+    },
+    {
+      "source": "f1f1425b",
+      "target": "516e9ba5"
+    },
+    {
+      "source": "44f91f3b",
+      "target": "516e9ba5"
+    },
+    {
+      "source": "04806414",
+      "target": "44f91f3b"
+    }
+  ],
+  "layers": [
+    "feature",
+    "intermediate",
+    "primary",
+    "raw",
+    "model_input",
+    "models",
+    "reporting"
+  ],
+  "tags": [],
+  "pipelines": [
+    {
+      "id": "__default__",
+      "name": "__default__"
+    },
+    {
+      "id": "integracao",
+      "name": "integracao"
+    },
+    {
+      "id": "ingestao",
+      "name": "ingestao"
+    },
+    {
+      "id": "relatorio",
+      "name": "relatorio"
+    },
+    {
+      "id": "features",
+      "name": "features"
+    },
+    {
+      "id": "modelagem",
+      "name": "modelagem"
+    }
+  ],
+  "modular_pipelines": {
+    "__root__": {
+      "id": "__root__",
+      "name": "__root__",
+      "inputs": [],
+      "outputs": [],
+      "children": [
+        {
+          "id": "52eabac6",
+          "type": "data"
+        },
+        {
+          "id": "305d9307",
+          "type": "data"
+        },
+        {
+          "id": "f1f1425b",
+          "type": "parameters"
+        },
+        {
+          "id": "04806414",
+          "type": "task"
+        },
+        {
+          "id": "516e9ba5",
+          "type": "task"
+        },
+        {
+          "id": "9013969d",
+          "type": "task"
+        },
+        {
+          "id": "06154291",
+          "type": "data"
+        },
+        {
+          "id": "1a338160",
+          "type": "data"
+        },
+        {
+          "id": "44bf045b",
+          "type": "data"
+        },
+        {
+          "id": "abba6963",
+          "type": "task"
+        },
+        {
+          "id": "44f91f3b",
+          "type": "data"
+        },
+        {
+          "id": "f1f1425b",
+          "type": "data"
+        }
+      ]
+    }
+  },
+  "selected_pipeline": "modelagem"
+}
