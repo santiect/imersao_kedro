@@ -445,6 +445,16 @@ kedro run
 
 ---
 
+# Um hook pode valer pra um nó só
+
+- Todos os nós → tempo de execução
+- Um dataset específico → qualidade da tabela analítica
+- **Um nó específico** → a revocação do modelo, só quando ele é avaliado
+
+<p class="impacto">O time sabe, sem abrir notebook nenhum, que esse modelo ainda é ponto de partida — não produto pronto.</p>
+
+---
+
 # Em produção
 
 - Container **Docker** empacota o projeto

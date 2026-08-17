@@ -70,7 +70,7 @@ e para poder recolocar se um dia a carga voltar a crescer.
 | Retomada entre encontros | 15 min de abertura do Enc. 2 | Eliminado (não há segundo encontro) | — |
 
 O projeto Kedro (`projeto/olist_analytics/`) **mantém os 5 pipelines**
-(`ingestao`, `integracao`, `features`, `relatorio`, `modelagem`) e os 2 hooks
+(`ingestao`, `integracao`, `features`, `relatorio`, `modelagem`) e os 3 hooks
 já implementados — nada no código precisa mudar. O corte é só de **tempo de
 demonstração e de slide**, não de escopo técnico do projeto.
 
@@ -385,21 +385,28 @@ Esta é a demo mais eficiente em tempo×impacto de toda a aula — cabe em ~5 mi
 
 ### 5.5 Hooks (vitrine — ~15 min, não seção)
 
-Dois hooks, ambos já implementados em `hooks.py`. Na sessão única, só
-**demonstrados**, sem aprofundar a API de hooks em si:
+Três hooks, todos já implementados em `hooks.py`. Na sessão única, só
+**demonstrados**, sem aprofundar a API de hooks em si — cada um ilustra um
+escopo de atuação diferente:
 
-1. **`RelatorioExecucaoHook`** — cronometra cada nó e imprime uma tabela ao
-   final de **todo** `kedro run`. Não precisa de tempo dedicado: já aparece
-   sozinho em qualquer demo de pipeline anterior — o instrutor só aponta na
-   primeira vez que surgir na tela.
-2. **`QualidadeDadosHook`** — em `after_dataset_loaded`, valida a tabela
-   analítica e **interrompe a execução** ao violar uma regra mínima. Esta é a
-   única parte que ganha tempo dedicado (~10 min): o instrutor edita
-   `periodo.inicio` e `periodo.fim` em `parameters.yml` para o mesmo dia
-   (testado: `"2018-08-31"` nos dois campos → 0 linhas — uma semana inteira
-   **não** é suficiente, ainda dá ~223 linhas), roda, e a pipeline para com uma
-   mensagem clara. Mensagem de negócio: *"dado ruim não chega no relatório da
-   diretoria"*.
+1. **`RelatorioExecucaoHook`** (reage a **todos os nós**) — cronometra cada nó
+   e imprime uma tabela ao final de **todo** `kedro run`. Não precisa de tempo
+   dedicado: já aparece sozinho em qualquer demo de pipeline anterior — o
+   instrutor só aponta na primeira vez que surgir na tela.
+2. **`QualidadeDadosHook`** (reage a **um dataset**) — em
+   `after_dataset_loaded`, valida a tabela analítica e **interrompe a
+   execução** ao violar uma regra mínima. Ganha tempo dedicado (~10 min): o
+   instrutor edita `periodo.inicio` e `periodo.fim` em `parameters.yml` para o
+   mesmo dia (testado: `"2018-08-31"` nos dois campos → 0 linhas — uma semana
+   inteira **não** é suficiente, ainda dá ~223 linhas), roda, e a pipeline para
+   com uma mensagem clara. Mensagem de negócio: *"dado ruim não chega no
+   relatório da diretoria"*.
+3. **`MetricaModeloHook`** (reage a **um nó específico**, `avaliar_modelo`) —
+   em `after_node_run`, alerta (sem interromper) quando a revocação do modelo
+   fica abaixo da meta de negócio. Demo rápida (~2 min):
+   `kedro run --from-nodes=avaliar_modelo` (roda em <1s, datasets de entrada
+   já persistidos) e o warning aparece isolado no terminal. Fecha o trio de
+   escopos possíveis de um hook: todos os nós, um dataset, um nó.
 
 ### 5.6 Kedro-Viz — o clímax
 

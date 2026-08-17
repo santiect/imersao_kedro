@@ -443,7 +443,7 @@ importante ter backup, porque é o clímax da aula.
 ## [2:35–2:50] Hooks · (15 min)
 
 **Objetivo:** mostrar governança automática — dado ruim não passa.
-**Slides:** 33
+**Slides:** 33–34
 **Tela:** terminal → VS Code → terminal
 
 ### O que falar (abertura, sem comando)
@@ -451,8 +451,8 @@ importante ter backup, porque é o clímax da aula.
   tempo por node? Isso é automático — um hook que já roda desde o começo da
   aula, sem eu ter feito nada de especial. Serve pra saber onde o pipeline
   gasta tempo (e, em produção, dinheiro de processamento)."
-- "Agora vou mostrar outro hook, que **impede** um relatório ruim de ser
-  gerado."
+- "Esse hook reage a **todos** os nós. Agora vou mostrar outro, que reage só
+  a **um dataset** — e impede um relatório ruim de ser gerado."
 
 ### Comandos
 Editar `conf/base/parameters.yml` ao vivo:
@@ -486,41 +486,69 @@ kedro run > /dev/null 2>&1 && echo "voltou ao normal"
   vez; a regra está no projeto."
 - Mensagem de negócio: "dado ruim não chega no relatório da diretoria."
 
+**Terceiro hook — reage a um nó específico (Slide 34):**
+```bash
+kedro run --from-nodes=avaliar_modelo
+```
+Aparece:
+```
+WARNING  Nó 'avaliar_modelo': revocação de 28% está abaixo da meta de 50% —
+         modelo ainda não substitui triagem manual, é ponto de partida.
+```
+(roda em <1s — `avaliar_modelo` lê `modelo_review_ruim` e `dados_teste`, já
+persistidos, não retreina nada).
+
+- "Esse terceiro hook não olha pra todos os nós, nem pra um dataset — ele só
+  liga quando o nó `avaliar_modelo` roda. Reexecutei só esse nó e o aviso
+  apareceu na hora."
+- "São as três formas de escopo que um hook pode ter: todos os nós (tempo de
+  execução), um dataset específico (qualidade da tabela), ou um nó
+  específico (essa métrica do modelo)."
+- Mensagem de negócio: "o time sabe, sem abrir nenhum notebook, que esse
+  modelo ainda não está pronto pra decisão automática — é sinal, não bloqueio."
+
 ### Perguntas prováveis
 - **"Isso substitui teste de dados tipo Great Expectations?"** → É mais
   simples — dá pra crescer pra ferramentas dedicadas, mas o princípio
   (validar antes de entregar) é o mesmo.
+- **"Por que esse hook só avisa e não impede, como o da qualidade de
+  dados?"** → Decisão de design: a revocação real do modelo (28%) já está
+  abaixo da meta o tempo todo — se ele barrasse a execução, todo `kedro run`
+  falharia. `raise` faz sentido pra dado corrompido; `warning` faz mais
+  sentido pra "abaixo da meta, mas ainda utilizável como ponto de partida".
 
 ### Se der errado
-Se por algum motivo o hook não disparar (regra de negócio foi alterada por
-engano antes da aula), o erro esperado não aparece — nesse caso, siga direto
-com a explicação verbal da tabela de tempo por node (que já apareceu em todo
-`kedro run` anterior) e pule a quebra proposital.
+Se por algum motivo o segundo hook não disparar (regra de negócio foi
+alterada por engano antes da aula), o erro esperado não aparece — nesse
+caso, siga direto com a explicação verbal da tabela de tempo por node (que
+já apareceu em todo `kedro run` anterior) e pule a quebra proposital. O
+terceiro hook (revocação) não depende de nenhuma edição prévia — deve
+funcionar sempre.
 
 ---
 
 ## [2:50–3:00] Produção, valor e encerramento · (10 min)
 
 **Objetivo:** fechar com o argumento de negócio e entregar o material.
-**Slides:** 34–38
+**Slides:** 35–39
 **Tela:** slides
 
 ### O que falar
-- Slide 34 (panorama, rápido): "em produção, esse projeto roda dentro de um
+- Slide 35 (panorama, rápido): "em produção, esse projeto roda dentro de um
   container Docker, agendado por uma ferramenta como Airflow, e pode registrar
   experimentos com o MLflow. Não vou entrar em como configurar isso — só
   saibam que existe e que o Kedro se encaixa nesse ecossistema sem mudar a
   estrutura que vocês viram hoje."
-- Slide 35 (argumento econômico): "o ganho real não é técnico, é de time.
+- Slide 36 (argumento econômico): "o ganho real não é técnico, é de time.
   Uma pessoa nova entra no projeto e entende a estrutura em horas, não em
   dias lendo um script de 200 linhas. Se quem escreveu sai da empresa, o
   projeto continua legível."
-- Slide 36 (quando não vale a pena): projeto de exploração de 1 pessoa, muito
+- Slide 37 (quando não vale a pena): projeto de exploração de 1 pessoa, muito
   curto, não precisa dessa estrutura — o Kedro compensa quando o projeto vai
   durar e/ou ser compartilhado.
-- Slide 37: créditos do dataset (*"Brazilian E-Commerce Public Dataset by
+- Slide 38: créditos do dataset (*"Brazilian E-Commerce Public Dataset by
   Olist (Kaggle), CC BY-NC-SA 4.0"*) + recursos pra continuar.
-- Slide 38: agradecer, avisar que o link do repositório e do Kedro-Viz
+- Slide 39: agradecer, avisar que o link do repositório e do Kedro-Viz
   publicado vão para o chat, abrir pra últimas perguntas.
 
 ### Perguntas prováveis

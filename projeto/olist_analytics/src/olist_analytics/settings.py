@@ -4,9 +4,9 @@ https://docs.kedro.org/en/stable/configure/configuration_basics/#configuration""
 
 # Instantiated project hooks.
 # Hooks are executed in a Last-In-First-Out (LIFO) order.
-from olist_analytics.hooks import QualidadeDadosHook, RelatorioExecucaoHook
+from olist_analytics.hooks import MetricaModeloHook, QualidadeDadosHook, RelatorioExecucaoHook
 
-HOOKS = (RelatorioExecucaoHook(), QualidadeDadosHook())
+HOOKS = (RelatorioExecucaoHook(), QualidadeDadosHook(), MetricaModeloHook())
 
 # Installed plugins for which to disable hook auto-registration.
 #

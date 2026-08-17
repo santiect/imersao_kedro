@@ -30,8 +30,10 @@ nada.
    kedro viz run    # abre o grafo em localhost:4141
    ```
 4. **O roteiro da aula** está em [`roteiros/aula.md`](roteiros/aula.md) — é o
-   documento que você segue numa segunda tela. O protocolo pra quando algo
-   quebra ao vivo está em [`roteiros/plano-b.md`](roteiros/plano-b.md).
+   documento que você segue numa segunda tela. Pra consulta rápida só de
+   comandos, tem [`roteiros/comandos.md`](roteiros/comandos.md). O protocolo
+   pra quando algo quebra ao vivo está em
+   [`roteiros/plano-b.md`](roteiros/plano-b.md).
 5. **Os slides** estão em [`slides/aula.md`](slides/aula.md) (Marp). Para
    exportar em PDF (requer Node.js — `node --version` pra conferir):
    ```bash
@@ -87,8 +89,8 @@ Bem-vindo(a) de volta. Aqui você encontra:
   termos usados na aula, explicados em linguagem de negócio.
 - **[`material-aluno/leituras.md`](material-aluno/leituras.md)** — para onde
   ir se quiser se aprofundar.
-- **O grafo interativo do projeto (Kedro-Viz)** — link compartilhado no chat
-  da aula.
+- **O grafo interativo do projeto (Kedro-Viz)**:
+  [santiect.github.io/imersao_kedro](https://santiect.github.io/imersao_kedro/).
 - **Todo o código do projeto de demonstração** — em
   [`projeto/olist_analytics/`](projeto/olist_analytics/).
 
@@ -102,8 +104,8 @@ aplicação em produção. Contém:
 - `antes/` — um script de análise "ruim" de propósito, usado para instalar o
   problema que o Kedro resolve.
 - `projeto/olist_analytics/` — um projeto Kedro 1.5 completo e funcional, com
-  5 pipelines, catálogo de dados em 7 camadas, parâmetros de negócio e hooks
-  de qualidade de dados.
+  5 pipelines, catálogo de dados em 7 camadas, parâmetros de negócio e 3
+  hooks (tempo de execução, qualidade de dados, métrica de modelo).
 - `slides/`, `roteiros/`, `material-aluno/` — o material da aula em si.
 
 O desenho completo (narrativa, decisões de arquitetura, riscos) está em

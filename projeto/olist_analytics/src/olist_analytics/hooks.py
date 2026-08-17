@@ -1,11 +1,16 @@
 """Hooks do projeto — vitrine curta (Encontro 2, ~20 min), não seção longa.
 
-Dois hooks, cada um com um argumento de negócio direto:
+Três hooks, cada um com um argumento de negócio direto:
 
 - RelatorioExecucaoHook: "onde meu pipeline gasta tempo" (e, por extensão,
-  dinheiro de processamento).
+  dinheiro de processamento). Reage a **todos** os nós.
 - QualidadeDadosHook: "dado ruim não chega no relatório da diretoria" — barra
-  a execução quando a tabela analítica viola uma regra mínima.
+  a execução quando a tabela analítica viola uma regra mínima. Reage a
+  **um dataset** específico (`tabela_analitica`), qualquer que seja o nó que
+  o carregar.
+- MetricaModeloHook: "esse modelo já é bom o suficiente pra usar?" — alerta
+  quando a revocação fica abaixo da meta. Reage a **um nó** específico
+  (`avaliar_modelo`), ignora todos os outros.
 
 Registrados em settings.py.
 """
@@ -22,6 +27,9 @@ logger = logging.getLogger(__name__)
 
 NOME_TABELA_ANALITICA = "tabela_analitica"
 MINIMO_LINHAS_TABELA_ANALITICA = 100
+
+NOME_NO_AVALIACAO_MODELO = "avaliar_modelo"
+REVOCACAO_MINIMA_ACEITAVEL = 0.5
 
 
 class RelatorioExecucaoHook:
@@ -103,3 +111,28 @@ class QualidadeDadosHook:
             raise ValueError(mensagem)
 
         logger.info("Qualidade de dados OK em '%s' (%d linhas)", dataset_name, len(data))
+
+
+class MetricaModeloHook:
+    """Alerta quando o modelo avaliado fica abaixo da meta de revocação.
+
+    Só reage ao nó 'avaliar_modelo' — todo `after_node_run` dos outros nós
+    (dividir_treino_teste, treinar_modelo, calcular_importancia_features)
+    sai no primeiro `if`. É a demo de que um hook pode valer pra um nó só,
+    em vez de todos (RelatorioExecucaoHook) ou um dataset (QualidadeDadosHook).
+    """
+
+    @hook_impl
+    def after_node_run(self, node: Node, outputs: dict) -> None:
+        if node.name != NOME_NO_AVALIACAO_MODELO:
+            return
+
+        revocacao = outputs["metricas_modelo"]["revocacao"]
+        if revocacao < REVOCACAO_MINIMA_ACEITAVEL:
+            logger.warning(
+                "Nó '%s': revocação de %.0f%% está abaixo da meta de %.0f%% — "
+                "modelo ainda não substitui triagem manual, é ponto de partida.",
+                node.name,
+                revocacao * 100,
+                REVOCACAO_MINIMA_ACEITAVEL * 100,
+            )
